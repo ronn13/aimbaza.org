@@ -1,1 +1,1 @@
-web: gunicorn aimbaza.wsgi --log-file -
+web: gunicorn aimbaza.wsgi:application --bind 0.0.0.0:$PORT --log-file -
