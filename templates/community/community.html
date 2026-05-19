@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Community{% endblock %}
+{% block description %}Join the MBAZA-NLP open community — Slack, GitHub, HuggingFace{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-3">Community</h1>
+  <p class="lead mb-5">
+    MBAZA-NLP is an open community. Everyone is welcome — researchers, engineers, linguists,
+    students, and anyone passionate about African language technology.
+  </p>
+
+  <!-- Channels table -->
+  <h2 class="h4 fw-semibold mb-3">Community Channels</h2>
+  <div class="table-responsive mb-5">
+    <table class="table table-bordered align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Channel</th>
+          <th scope="col">Link</th>
+          <th scope="col">Purpose</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><i class="fab fa-slack me-2 text-primary"></i>Slack</td>
+          <td>
+            <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+               target="_blank" rel="noopener">Join Slack workspace</a>
+          </td>
+          <td>Day-to-day discussion, help, and announcements</td>
+        </tr>
+        <tr>
+          <td><i class="fab fa-github me-2 text-dark"></i>GitHub</td>
+          <td>
+            <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener">
+              github.com/MBAZA-NLP
+            </a>
+          </td>
+          <td>Code, issues, and pull requests</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-circle-nodes me-2 text-warning"></i>HuggingFace</td>
+          <td>
+            <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">
+              huggingface.co/mbazaNLP
+            </a>
+          </td>
+          <td>Models, datasets, and Spaces</td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-envelope me-2 text-secondary"></i>Email</td>
+          <td>
+            <a href="mailto:mbazanlp.community@gmail.com">
+              mbazanlp.community@gmail.com
+            </a>
+          </td>
+          <td>General enquiries</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Contributing -->
+  <h2 class="h4 fw-semibold mb-3">Contributing</h2>
+  <p>
+    Want to contribute? Read our Contributing Guide to learn how to get started with code,
+    data, or documentation contributions.
+  </p>
+  <a href="https://github.com/MBAZA-NLP/.github/blob/main/CONTRIBUTING.md"
+     target="_blank" rel="noopener" class="btn btn-outline-dark">
+    <i class="fab fa-github me-2"></i>Read the Contributing Guide
+  </a>
+
+</div>
+{% endblock %}

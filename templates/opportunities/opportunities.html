@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Opportunities{% endblock %}
+{% block description %}Fellowships, grants, and HPC access opportunities for MBAZA-NLP community members{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-4">Opportunities</h1>
+  <p class="lead mb-5">
+    Resources and opportunities available to MBAZA-NLP community members.
+  </p>
+
+  <div class="row g-4">
+
+    <!-- Fellowships -->
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="mb-3">
+            <i class="fas fa-user-graduate fa-2x text-primary"></i>
+          </div>
+          <h5 class="card-title fw-semibold">Fellowships</h5>
+          <p class="card-text text-muted">
+            Open calls for NLP research fellowships and residencies.
+            Check back for updates on current opportunities.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grants -->
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="mb-3">
+            <i class="fas fa-hand-holding-dollar fa-2x text-success"></i>
+          </div>
+          <h5 class="card-title fw-semibold">Grants &amp; Funding</h5>
+          <p class="card-text text-muted">
+            Information on grants available to community members for NLP research and projects.
+            Check back for updates.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- DFKI HPC -->
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="mb-3">
+            <i class="fas fa-server fa-2x text-warning"></i>
+          </div>
+          <h5 class="card-title fw-semibold">DFKI HPC Access</h5>
+          <p class="card-text text-muted">
+            MBAZA-NLP members can apply for access to the DFKI High-Performance Computing cluster
+            in Germany. See the
+            <a href="https://github.com/MBAZA-NLP/hpc-infrastructure-access"
+               target="_blank" rel="noopener">hpc-infrastructure-access</a>
+            repo for the tutorial.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-5">
+    <p class="text-muted">
+      Want to be notified when new opportunities are announced?
+      <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+         target="_blank" rel="noopener">Join our Slack</a> community.
+    </p>
+  </div>
+
+</div>
+{% endblock %}

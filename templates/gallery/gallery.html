@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Gallery{% endblock %}
+{% block description %}Photos from MBAZA-NLP community events{% endblock %}
+
+{% block extra_css %}
+<style>
+  .gallery-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+  }
+  .gallery-img:hover { opacity: 0.88; }
+
+  .gallery-card {
+    cursor: pointer;
+  }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox img {
+    max-height: 85vh;
+    max-width: 92vw;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  #lightbox-caption {
+    color: #ccc;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+  #lightbox-prev, #lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  #lightbox-prev { left: 1rem; }
+  #lightbox-next { right: 1rem; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-1">Gallery</h1>
+  <p class="text-muted mb-2">Photos from MBAZA-NLP community events.</p>
+
+  <div class="mb-4">
+    <span class="badge bg-secondary">
+      <i class="fas fa-calendar me-1"></i>Bakame Community Event — Kigali, 15 April 2023
+    </span>
+    <span class="badge bg-light text-dark ms-2">{{ photos|length }} photos</span>
+  </div>
+
+  {% if photos %}
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3" id="gallery-grid">
+    {% for photo in photos %}
+    <div class="col">
+      <div class="gallery-card" data-index="{{ forloop.counter0 }}">
+        <img
+          src="{% static photo.url %}"
+          alt="{{ photo.alt }}"
+          class="gallery-img"
+          loading="lazy"
+        >
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-secondary">
+    <i class="fas fa-image me-2"></i>No photos available yet.
+  </div>
+  {% endif %}
+
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button id="lightbox-close" aria-label="Close">&times;</button>
+  <button id="lightbox-prev" aria-label="Previous">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <p id="lightbox-caption"></p>
+  <button id="lightbox-next" aria-label="Next">&#8250;</button>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  const photos = [
+    {% for photo in photos %}
+    { src: "{% static photo.url %}", alt: "{{ photo.alt }}" }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ];
+
+  let current = 0;
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lightbox-img');
+  const lbCap   = document.getElementById('lightbox-caption');
+  const lbClose = document.getElementById('lightbox-close');
+  const lbPrev  = document.getElementById('lightbox-prev');
+  const lbNext  = document.getElementById('lightbox-next');
+
+  function show(idx) {
+    current = (idx + photos.length) % photos.length;
+    lbImg.src = photos[current].src;
+    lbImg.alt = photos[current].alt;
+    lbCap.textContent = `${current + 1} / ${photos.length}  —  ${photos[current].alt}`;
+    lb.classList.add('active');
+  }
+
+  document.querySelectorAll('.gallery-card').forEach(card => {
+    card.addEventListener('click', () => show(parseInt(card.dataset.index)));
+  });
+
+  lbClose.addEventListener('click', () => lb.classList.remove('active'));
+  lbPrev.addEventListener('click',  () => show(current - 1));
+  lbNext.addEventListener('click',  () => show(current + 1));
+
+  lb.addEventListener('click', e => {
+    if (e.target === lb) lb.classList.remove('active');
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+    if (e.key === 'Escape')     lb.classList.remove('active');
+  });
+})();
+</script>
+{% endblock %}

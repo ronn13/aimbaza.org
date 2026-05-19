@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+{% block description %}MBAZA-NLP — building open-source NLP tools for Kinyarwanda and African languages{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<section class="hero-section text-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold mb-3">MBAZA NLP COMMUNITY</h1>
+    <p class="lead mb-4">
+      Building open-source language AI for Kinyarwanda and African languages.
+    </p>
+    <a href="https://github.com/MBAZA-NLP"
+       class="btn btn-outline-light btn-lg me-3" target="_blank" rel="noopener">
+      <i class="fab fa-github me-2"></i>Explore on GitHub
+    </a>
+    <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+       class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+      <i class="fab fa-slack me-2"></i>Join our Slack
+    </a>
+  </div>
+</section>
+
+<!-- About -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <!-- About text -->
+      <div class="col-lg-7">
+        <h2 class="fw-bold mb-3">About MBAZA-NLP</h2>
+        <p class="lead">
+          We are a community working on Natural Language Processing (NLP) for Kinyarwanda and other
+          low-resource languages. For example, we are working on Kinyarwanda automatic speech
+          recognition (ASR, also known as Speech-to-Text, STT), Text-to-Speech (TTS), and semantic
+          chatbots.
+        </p>
+        <p>
+          Our work is open-source and collaborative. We welcome researchers, engineers, linguists,
+          and enthusiasts who want to help build language technology for African languages.
+        </p>
+        <a href="{% url 'community:index' %}" class="btn btn-outline-primary mt-2">
+          Learn more about the community &rarr;
+        </a>
+      </div>
+      <!-- Quick links -->
+      <div class="col-lg-5">
+        <h3 class="fw-semibold mb-3">Quick Links</h3>
+        <div class="d-flex flex-column gap-3">
+          <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener"
+             class="card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
+            <i class="fab fa-github fa-2x text-dark"></i>
+            <div>
+              <div class="fw-semibold">GitHub</div>
+              <small class="text-muted">Source code, issues, and contributions</small>
+            </div>
+          </a>
+          <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+             target="_blank" rel="noopener"
+             class="card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
+            <i class="fab fa-slack fa-2x text-primary"></i>
+            <div>
+              <div class="fw-semibold">Slack</div>
+              <small class="text-muted">Day-to-day discussion and announcements</small>
+            </div>
+          </a>
+          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
+             class="card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
+            <i class="fas fa-circle-nodes fa-2x text-warning"></i>
+            <div>
+              <div class="fw-semibold">HuggingFace</div>
+              <small class="text-muted">Models, datasets, and Spaces</small>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Upcoming Events preview -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="fw-bold mb-3">Upcoming Events</h2>
+    <p class="text-muted">
+      No upcoming events right now. Join our Slack to stay updated on workshops, sprints,
+      and community calls.
+    </p>
+    <div class="d-flex gap-2">
+      <a href="{% url 'events:index' %}" class="btn btn-outline-secondary">
+        <i class="fas fa-calendar me-2"></i>View all events
+      </a>
+      <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+         target="_blank" rel="noopener" class="btn btn-primary">
+        <i class="fab fa-slack me-2"></i>Join Slack for updates
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Partners -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 text-center">Our Partners</h2>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="https://digitalumuganda.com/" target="_blank" rel="noopener"
+         class="partner-logo">
+        Digital Umuganda
+      </a>
+      <a href="https://www.giz.de/expertise/html/61982.html" target="_blank" rel="noopener"
+         class="partner-logo">
+        FairForward
+      </a>
+      <a href="https://www.giz.de/en/worldwide/332.html" target="_blank" rel="noopener"
+         class="partner-logo">
+        GIZ Rwanda
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

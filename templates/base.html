@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{% block description %}MBAZA-NLP — open-source language AI for Kinyarwanda and African languages{% endblock %}">
+  <title>{% block title %}MBAZA-NLP{% endblock %} | aimbaza.org</title>
+
+  <!-- Bootstrap 5 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; }
+    .navbar-brand { font-weight: 700; letter-spacing: 0.02em; }
+    .hero-section {
+      background: #1a1a2e;
+      color: #fff;
+      padding: 5rem 0;
+    }
+    .hero-section .btn-outline-light:hover { color: #1a1a2e; }
+    footer {
+      background: #1a1a2e;
+      color: #ccc;
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+    footer a { color: #adb5bd; text-decoration: none; }
+    footer a:hover { color: #fff; }
+    .card { border: 1px solid #dee2e6; }
+    .partner-logo {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      border: 1px solid #dee2e6;
+      border-radius: 0.5rem;
+      color: #495057;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .partner-logo:hover { border-color: #0d6efd; color: #0d6efd; text-decoration: none; }
+  </style>
+
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'core:home' %}">MBAZA-NLP</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#mainNav" aria-controls="mainNav"
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'home' and request.resolver_match.app_name == 'core' %}active{% endif %}"
+               href="{% url 'core:home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'projects' %}active{% endif %}"
+               href="{% url 'projects:index' %}">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'events' %}active{% endif %}"
+               href="{% url 'events:index' %}">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'blog' %}active{% endif %}"
+               href="{% url 'blog:index' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'opportunities' %}active{% endif %}"
+               href="{% url 'opportunities:index' %}">Opportunities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'community' %}active{% endif %}"
+               href="{% url 'community:index' %}">Community</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.app_name == 'gallery' %}active{% endif %}"
+               href="{% url 'gallery:index' %}">Gallery</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-5 mb-3 mb-md-0">
+          <span class="text-white fw-semibold">MBAZA-NLP Community</span><br>
+          <small>&copy; 2026 MBAZA-NLP Community &middot; <a href="https://aimbaza.org">aimbaza.org</a></small>
+        </div>
+        <div class="col-md-4 mb-3 mb-md-0">
+          <a href="https://github.com/MBAZA-NLP" class="me-3" title="GitHub">
+            <i class="fab fa-github fa-lg"></i> GitHub
+          </a>
+          <a href="https://huggingface.co/mbazaNLP" class="me-3" title="HuggingFace">
+            <i class="fas fa-circle-nodes fa-lg"></i> HuggingFace
+          </a>
+          <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg" title="Slack">
+            <i class="fab fa-slack fa-lg"></i> Slack
+          </a>
+        </div>
+        <div class="col-md-3 text-md-end">
+          <a href="mailto:mbazanlp.community@gmail.com">
+            <i class="fas fa-envelope"></i> mbazanlp.community@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap 5 JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

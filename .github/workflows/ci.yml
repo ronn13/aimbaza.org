@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements/development.txt
+
+      - name: Check formatting (black)
+        run: black --check .
+
+      - name: Lint (flake8)
+        run: flake8 .
+
+      - name: Django system check
+        run: |
+          cp .env.example .env
+          python manage.py check
+        env:
+          DJANGO_SETTINGS_MODULE: aimbaza.settings.development
+
+      - name: Run tests with coverage
+        run: python -m coverage run manage.py test apps
+        env:
+          DJANGO_SETTINGS_MODULE: aimbaza.settings.development
+
+      - name: Coverage report
+        run: python -m coverage report --fail-under=60
+
+      - name: Production settings check
+        run: python manage.py check --deploy
+        env:
+          DJANGO_SETTINGS_MODULE: aimbaza.settings.production
+          SECRET_KEY: ci-only-not-a-real-secret-key
+          DATABASE_URL: sqlite:///ci_check.sqlite3
+          ALLOWED_HOSTS: aimbaza.org
