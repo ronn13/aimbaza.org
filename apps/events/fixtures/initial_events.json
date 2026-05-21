@@ -1,0 +1,13 @@
+[
+  {
+    "model": "events.event",
+    "pk": 1,
+    "fields": {
+      "title": "Bakame Community Hackathon",
+      "date": "2023-04-22",
+      "location": "Kigali, Rwanda",
+      "description": "A community hackathon and showcase event bringing together MbazaNLP contributors to demo the Bakame chatbot and discuss the roadmap for Kinyarwanda NLP tooling.",
+      "url": ""
+    }
+  }
+]

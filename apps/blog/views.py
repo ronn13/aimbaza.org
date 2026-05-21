@@ -1,5 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from .models import Post
 
 
 def index(request):
-    return render(request, "blog/blog.html")
+    posts = Post.objects.filter(is_published=True)
+    return render(request, "blog/blog.html", {"posts": posts})
+
+
+def detail(request, slug):
+    post = get_object_or_404(Post, slug=slug, is_published=True)
+    return render(request, "blog/post_detail.html", {"post": post})

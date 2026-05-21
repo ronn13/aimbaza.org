@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Contribute{% endblock %}
+{% block description %}How to contribute to MbazaNLP — models, datasets, code, and community{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-2">Contribute to MbazaNLP</h1>
+  <p class="lead text-muted mb-5">
+    MbazaNLP is an open-source community. Every contribution — code, data, documentation,
+    or community support — moves Kinyarwanda NLP forward.
+  </p>
+
+  <div class="row g-4 mb-5">
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0 bg-light">
+        <div class="card-body">
+          <div class="mb-3"><i class="fas fa-database fa-2x text-primary"></i></div>
+          <h5 class="fw-semibold">Contribute Data</h5>
+          <p class="text-muted">
+            High-quality labelled data is the foundation of our models. You can contribute by:
+          </p>
+          <ul class="text-muted">
+            <li>Translating or validating sentence pairs</li>
+            <li>Recording or transcribing speech</li>
+            <li>Donating text corpora for training</li>
+          </ul>
+          <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener"
+             class="btn btn-sm btn-primary">Browse data repos &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0 bg-light">
+        <div class="card-body">
+          <div class="mb-3"><i class="fas fa-code fa-2x text-success"></i></div>
+          <h5 class="fw-semibold">Contribute Code</h5>
+          <p class="text-muted">
+            Help improve our models, tools, and infrastructure:
+          </p>
+          <ul class="text-muted">
+            <li>Fix bugs or open issues on GitHub</li>
+            <li>Improve model training scripts</li>
+            <li>Add demos, APIs, or integrations</li>
+          </ul>
+          <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener"
+             class="btn btn-sm btn-success">Browse code repos &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0 bg-light">
+        <div class="card-body">
+          <div class="mb-3"><i class="fas fa-file-alt fa-2x text-warning"></i></div>
+          <h5 class="fw-semibold">Improve Documentation</h5>
+          <p class="text-muted">
+            Good documentation makes models accessible to more people:
+          </p>
+          <ul class="text-muted">
+            <li>Update model and dataset cards on HuggingFace</li>
+            <li>Write tutorials and usage examples</li>
+            <li>Translate documentation into Kinyarwanda</li>
+          </ul>
+          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
+             class="btn btn-sm btn-warning">Browse HuggingFace org &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0 bg-light">
+        <div class="card-body">
+          <div class="mb-3"><i class="fab fa-slack fa-2x text-danger"></i></div>
+          <h5 class="fw-semibold">Join the Community</h5>
+          <p class="text-muted">
+            The community is where collaboration starts:
+          </p>
+          <ul class="text-muted">
+            <li>Answer questions in <strong>#help</strong> on Slack</li>
+            <li>Share opportunities in <strong>#opportunities</strong></li>
+            <li>Participate in community sprints and events</li>
+          </ul>
+          <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+             target="_blank" rel="noopener" class="btn btn-sm btn-danger">Join Slack &rarr;</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Workflow -->
+  <h2 class="h4 fw-semibold mb-3">Pull Request Workflow</h2>
+  <ol class="mb-4">
+    <li class="mb-2">Fork the relevant repository on GitHub.</li>
+    <li class="mb-2">Create a feature branch: <code>git checkout -b feat/your-feature-name</code></li>
+    <li class="mb-2">Make your changes and write or update tests where applicable.</li>
+    <li class="mb-2">Run linting before pushing: <code>black . && flake8 .</code></li>
+    <li class="mb-2">Open a pull request against <code>main</code> (or <code>develop</code> for the website repo).</li>
+    <li class="mb-2">A maintainer will review within 5 working days. Address any feedback and the PR will be merged.</li>
+  </ol>
+
+  <p class="text-muted">
+    Read the full
+    <a href="https://github.com/MBAZA-NLP/.github/blob/main/CONTRIBUTING.md"
+       target="_blank" rel="noopener">CONTRIBUTING.md</a>
+    for code style, commit message conventions, and branching standards.
+  </p>
+
+  <!-- Standards -->
+  <h2 class="h4 fw-semibold mt-5 mb-3">Engineering Standards</h2>
+  <p class="text-muted mb-3">
+    All MbazaNLP code and model contributions follow our community engineering standards:
+  </p>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card border-0 bg-light text-center p-3">
+        <i class="fab fa-python fa-2x mb-2 text-primary"></i>
+        <div class="fw-semibold">Python Style</div>
+        <small class="text-muted">Black + Flake8, PEP 8</small>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 bg-light text-center p-3">
+        <i class="fas fa-code-branch fa-2x mb-2 text-success"></i>
+        <div class="fw-semibold">Git Workflow</div>
+        <small class="text-muted">feat/fix/docs branch prefixes, descriptive commits</small>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-0 bg-light text-center p-3">
+        <i class="fas fa-id-card fa-2x mb-2 text-warning"></i>
+        <div class="fw-semibold">Model Cards</div>
+        <small class="text-muted">All HuggingFace releases require a complete model card</small>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,77 +1,148 @@
 {% extends "base.html" %}
 
 {% block title %}Opportunities{% endblock %}
-{% block description %}Fellowships, grants, and HPC access opportunities for MBAZA-NLP community members{% endblock %}
+{% block description %}Fellowships, grants, computing access, and job opportunities for the MbazaNLP community{% endblock %}
 
 {% block content %}
 <div class="container py-5">
 
-  <h1 class="fw-bold mb-4">Opportunities</h1>
-  <p class="lead mb-5">
-    Resources and opportunities available to MBAZA-NLP community members.
+  <h1 class="fw-bold mb-2">Opportunities</h1>
+  <p class="lead text-muted mb-5">
+    Grants, fellowships, computing resources, and collaboration calls open to MbazaNLP community members.
   </p>
 
-  <div class="row g-4">
-
-    <!-- Fellowships -->
-    <div class="col-md-4">
+  <!-- Computing Access -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-server text-primary me-2"></i>Computing Access</h2>
+  <div class="row g-3 mb-5">
+    <div class="col-md-6">
       <div class="card h-100">
         <div class="card-body">
-          <div class="mb-3">
-            <i class="fas fa-user-graduate fa-2x text-primary"></i>
-          </div>
-          <h5 class="card-title fw-semibold">Fellowships</h5>
-          <p class="card-text text-muted">
-            Open calls for NLP research fellowships and residencies.
-            Check back for updates on current opportunities.
+          <h6 class="fw-semibold">DFKI HPC Cluster</h6>
+          <p class="text-muted small">
+            MbazaNLP members can apply for access to the German Research Centre for Artificial Intelligence
+            (DFKI) High-Performance Computing cluster for NLP research and model training.
           </p>
+          <a href="https://github.com/MBAZA-NLP/hpc-infrastructure-access"
+             target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
+            Apply via GitHub &rarr;
+          </a>
         </div>
       </div>
     </div>
-
-    <!-- Grants -->
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card h-100">
         <div class="card-body">
-          <div class="mb-3">
-            <i class="fas fa-hand-holding-dollar fa-2x text-success"></i>
-          </div>
-          <h5 class="card-title fw-semibold">Grants &amp; Funding</h5>
-          <p class="card-text text-muted">
-            Information on grants available to community members for NLP research and projects.
-            Check back for updates.
+          <h6 class="fw-semibold">Google TPU Research Cloud</h6>
+          <p class="text-muted small">
+            Google offers free TPU access to researchers working on open-source NLP projects.
+            Academic and community applicants are eligible.
           </p>
+          <a href="https://sites.research.google/trc/about/" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-primary">
+            Learn more &rarr;
+          </a>
         </div>
       </div>
     </div>
-
-    <!-- DFKI HPC -->
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="mb-3">
-            <i class="fas fa-server fa-2x text-warning"></i>
-          </div>
-          <h5 class="card-title fw-semibold">DFKI HPC Access</h5>
-          <p class="card-text text-muted">
-            MBAZA-NLP members can apply for access to the DFKI High-Performance Computing cluster
-            in Germany. See the
-            <a href="https://github.com/MBAZA-NLP/hpc-infrastructure-access"
-               target="_blank" rel="noopener">hpc-infrastructure-access</a>
-            repo for the tutorial.
-          </p>
-        </div>
-      </div>
-    </div>
-
   </div>
 
-  <div class="mt-5">
-    <p class="text-muted">
-      Want to be notified when new opportunities are announced?
-      <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
-         target="_blank" rel="noopener">Join our Slack</a> community.
-    </p>
+  <!-- Grants & Funding -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-hand-holding-dollar text-success me-2"></i>Grants &amp; Funding</h2>
+  <div class="row g-3 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="fw-semibold">Lacuna Fund</h6>
+          <p class="text-muted small">
+            Funds the creation of labelled training data for machine learning in the Global South,
+            with a focus on underrepresented languages including African languages.
+          </p>
+          <a href="https://lacunafund.org" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-success">Visit Lacuna Fund &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="fw-semibold">Mozilla Technology Fund</h6>
+          <p class="text-muted small">
+            Supports open-source projects and research that advance trustworthy AI and internet health,
+            including low-resource language technology.
+          </p>
+          <a href="https://foundation.mozilla.org/en/what-we-fund/awards/mozilla-technology-fund/"
+             target="_blank" rel="noopener" class="btn btn-sm btn-outline-success">
+            Learn more &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="fw-semibold">AI4D Africa Grants</h6>
+          <p class="text-muted small">
+            The Artificial Intelligence for Development Africa initiative funds NLP and AI research
+            in African contexts, with grants for researchers and community organisations.
+          </p>
+          <a href="https://ai4d.ai" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-success">Visit AI4D &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="fw-semibold">GIZ Digital Transformation</h6>
+          <p class="text-muted small">
+            GIZ Rwanda's Digital Transformation Center supports digital public goods and
+            open-source community infrastructure in Rwanda.
+          </p>
+          <a href="https://www.giz.de/en/worldwide/33041.html" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-success">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fellowships -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-user-graduate text-warning me-2"></i>Fellowships &amp; Residencies</h2>
+  <div class="row g-3 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="fw-semibold">Masakhane Research Grants</h6>
+          <p class="text-muted small">
+            Masakhane, the pan-African NLP research community, periodically offers grants and
+            collaboration opportunities for African language NLP research.
+          </p>
+          <a href="https://www.masakhane.io" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-warning">Visit Masakhane &rarr;</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="fw-semibold">Google for Startups</h6>
+          <p class="text-muted small">
+            Google for Startups Africa offers equity-free funding, cloud credits, and mentorship
+            to startups building AI tools in Africa.
+          </p>
+          <a href="https://startup.google.com/programs/black-founders-fund/africa/"
+             target="_blank" rel="noopener" class="btn btn-sm btn-outline-warning">
+            Learn more &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-light border mt-4">
+    <i class="fab fa-slack me-2 text-primary"></i>
+    New opportunities are shared in <strong>#opportunities</strong> on our Slack workspace.
+    <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+       target="_blank" rel="noopener">Join Slack &rarr;</a>
   </div>
 
 </div>

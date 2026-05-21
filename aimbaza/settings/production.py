@@ -50,3 +50,9 @@ CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
+
+# Canonical site URL — used by sitemap and Open Graph tags
+SITE_URL = config("SITE_URL", default="https://aimbaza.org")
+
+# Plausible analytics domain (e.g. "aimbaza.org"). Leave blank to disable.
+PLAUSIBLE_DOMAIN = config("PLAUSIBLE_DOMAIN", default="")

@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Services &amp; Offerings{% endblock %}
+{% block description %}What MbazaNLP offers — open NLP tools, research collaboration, and community resources for Kinyarwanda and African languages{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-2">Services &amp; Offerings</h1>
+  <p class="lead text-muted mb-5">
+    MbazaNLP provides open-source NLP infrastructure and community resources for Kinyarwanda
+    and East African languages. All tools are freely available under open licences.
+  </p>
+
+  <!-- Core offerings -->
+  <div class="row g-4 mb-5">
+
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center border-0 shadow-sm">
+        <div class="card-body py-4">
+          <i class="fas fa-language fa-3x text-primary mb-3"></i>
+          <h5 class="fw-semibold">Machine Translation</h5>
+          <p class="text-muted small">
+            Open models for English–Kinyarwanda translation across general, education,
+            and tourism domains. Fine-tuned on NLLB-200.
+          </p>
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-primary">
+            Browse models &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center border-0 shadow-sm">
+        <div class="card-body py-4">
+          <i class="fas fa-microphone fa-3x text-success mb-3"></i>
+          <h5 class="fw-semibold">Speech Recognition</h5>
+          <p class="text-muted small">
+            ASR models for Kinyarwanda using Whisper, NeMo Conformer, and Coqui STT.
+            Multilingual model covers Kinyarwanda, Swahili, and Luganda.
+          </p>
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-success">
+            Browse models &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center border-0 shadow-sm">
+        <div class="card-body py-4">
+          <i class="fas fa-volume-high fa-3x text-warning mb-3"></i>
+          <h5 class="fw-semibold">Text-to-Speech</h5>
+          <p class="text-muted small">
+            TTS synthesis model producing natural Kinyarwanda speech,
+            suitable for accessibility and voice interface applications.
+          </p>
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-warning">
+            Browse models &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-3">
+      <div class="card h-100 text-center border-0 shadow-sm">
+        <div class="card-body py-4">
+          <i class="fas fa-database fa-3x text-secondary mb-3"></i>
+          <h5 class="fw-semibold">Open Datasets</h5>
+          <p class="text-muted small">
+            Parallel corpora and benchmark datasets for Kinyarwanda NLP research,
+            openly licensed for academic and commercial use.
+          </p>
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-secondary">
+            Browse datasets &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Research collaboration -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-6">
+      <div class="card h-100 border-0 bg-light">
+        <div class="card-body">
+          <div class="mb-3"><i class="fas fa-microscope fa-2x text-primary"></i></div>
+          <h5 class="fw-semibold">Research Collaboration</h5>
+          <p class="text-muted">
+            MbazaNLP welcomes research partnerships with universities, institutes, and NGOs
+            working on African language technology. We can collaborate on:
+          </p>
+          <ul class="text-muted">
+            <li>Joint model development and evaluation</li>
+            <li>Data collection and annotation sprints</li>
+            <li>Grant applications (Lacuna Fund, AI4D, Mozilla)</li>
+            <li>Co-authoring research publications</li>
+          </ul>
+          <a href="mailto:mbazanlp.community@gmail.com" class="btn btn-sm btn-primary">
+            Get in touch &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card h-100 border-0 bg-light">
+        <div class="card-body">
+          <div class="mb-3"><i class="fas fa-chalkboard-teacher fa-2x text-success"></i></div>
+          <h5 class="fw-semibold">Training &amp; Workshops</h5>
+          <p class="text-muted">
+            The community organises technical workshops and sprints for developers and researchers
+            in Rwanda and the wider region. Topics include:
+          </p>
+          <ul class="text-muted">
+            <li>Fine-tuning language models for low-resource languages</li>
+            <li>Data collection and quality assurance for NLP</li>
+            <li>Deploying AI models in production (APIs, demos)</li>
+            <li>Contributing to open-source AI projects</li>
+          </ul>
+          <a href="{% url 'events:index' %}" class="btn btn-sm btn-success">
+            Upcoming events &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HPC -->
+  <div class="card border-0 bg-dark text-white mb-5">
+    <div class="card-body py-4">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h5 class="fw-semibold"><i class="fas fa-server me-2"></i>HPC Computing Access</h5>
+          <p class="mb-0 text-white-50">
+            Community members can apply for access to DFKI's High-Performance Computing cluster
+            in Germany for large-scale model training.
+          </p>
+        </div>
+        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+          <a href="{% url 'opportunities:index' %}" class="btn btn-outline-light">
+            Learn more &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <p class="text-muted mb-3">Have a project idea or collaboration proposal?</p>
+    <a href="mailto:mbazanlp.community@gmail.com" class="btn btn-primary me-2">
+      <i class="fas fa-envelope me-1"></i>Email us
+    </a>
+    <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+       target="_blank" rel="noopener" class="btn btn-outline-secondary">
+      <i class="fab fa-slack me-1"></i>Join Slack
+    </a>
+  </div>
+
+</div>
+{% endblock %}

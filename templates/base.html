@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{% block description %}MBAZA-NLP — open-source language AI for Kinyarwanda and African languages{% endblock %}">
+  <link rel="canonical" href="{% block canonical %}{{ request.build_absolute_uri }}{% endblock %}">
   <title>{% block title %}MBAZA-NLP{% endblock %} | aimbaza.org</title>
 
   <!-- Bootstrap 5 -->
@@ -77,6 +78,14 @@
                href="{% url 'opportunities:index' %}">Opportunities</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'contribute' %}active{% endif %}"
+               href="{% url 'core:contribute' %}">Contribute</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'services' %}active{% endif %}"
+               href="{% url 'core:services' %}">Services</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.app_name == 'community' %}active{% endif %}"
                href="{% url 'community:index' %}">Community</a>
           </li>
@@ -125,5 +134,7 @@
   <!-- Bootstrap 5 JS bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   {% block extra_js %}{% endblock %}
+  {% if PLAUSIBLE_DOMAIN %}<script defer data-domain="{{ PLAUSIBLE_DOMAIN }}" src="https://plausible.io/js/script.js"></script>{% endif %}
+  {% block analytics %}{% endblock %}
 </body>
 </html>

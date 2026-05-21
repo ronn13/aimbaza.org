@@ -6,85 +6,86 @@
 {% block content %}
 <div class="container py-5">
 
-  <h1 class="fw-bold mb-3">Projects &amp; Models</h1>
-  <p class="lead mb-5">
-    MBAZA-NLP builds open-source NLP tools for Kinyarwanda and East African languages.
-    Explore our models and datasets on HuggingFace and our code on GitHub.
+  <h1 class="fw-bold mb-2">Projects &amp; Models</h1>
+  <p class="lead text-muted mb-5">
+    Open-source NLP models and datasets for Kinyarwanda and East African languages,
+    built by the MbazaNLP community and freely available on HuggingFace.
   </p>
 
-  <div class="row g-4">
-
-    <!-- Translation Models -->
-    <div class="col-md-4">
+  <!-- Translation -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-language text-primary me-2"></i>Machine Translation</h2>
+  <div class="row g-3 mb-5">
+    {% for m in translation_models %}
+    <div class="col-md-6 col-lg-4">
       <div class="card h-100">
         <div class="card-body d-flex flex-column">
-          <div class="mb-3">
-            <i class="fas fa-language fa-2x text-primary"></i>
-          </div>
-          <h5 class="card-title fw-semibold">Translation Models</h5>
-          <p class="card-text text-muted flex-grow-1">
-            Neural machine translation models for Kinyarwanda and other low-resource African languages.
-          </p>
-          <span class="badge bg-secondary mb-3">Coming soon</span>
-          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
-             class="btn btn-outline-primary mt-auto">
-            View on HuggingFace &rarr;
-          </a>
+          <h6 class="card-title fw-semibold mb-1">{{ m.name }}</h6>
+          <p class="card-text text-muted small flex-grow-1">{{ m.desc }}</p>
+          <a href="{{ m.url }}" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-primary mt-2">View on HuggingFace &rarr;</a>
         </div>
       </div>
     </div>
-
-    <!-- Speech Recognition -->
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <div class="mb-3">
-            <i class="fas fa-microphone fa-2x text-success"></i>
-          </div>
-          <h5 class="card-title fw-semibold">Speech Recognition</h5>
-          <p class="card-text text-muted flex-grow-1">
-            Automatic speech recognition (ASR / Speech-to-Text) models for Kinyarwanda.
-          </p>
-          <span class="badge bg-secondary mb-3">Coming soon</span>
-          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
-             class="btn btn-outline-primary mt-auto">
-            View on HuggingFace &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Text-to-Speech -->
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <div class="mb-3">
-            <i class="fas fa-volume-high fa-2x text-warning"></i>
-          </div>
-          <h5 class="card-title fw-semibold">Text-to-Speech</h5>
-          <p class="card-text text-muted flex-grow-1">
-            Text-to-Speech (TTS) synthesis models producing natural Kinyarwanda speech.
-          </p>
-          <span class="badge bg-secondary mb-3">Coming soon</span>
-          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
-             class="btn btn-outline-primary mt-auto">
-            View on HuggingFace &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-
+    {% endfor %}
   </div>
 
-  <div class="mt-5 text-muted">
-    <small>
-      Full project listings pulled from GitHub and HuggingFace APIs are planned for a future sprint.
-      For now, browse directly:
-      <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener">github.com/MBAZA-NLP</a>
-      &middot;
-      <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">huggingface.co/mbazaNLP</a>
-    </small>
+  <!-- ASR -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-microphone text-success me-2"></i>Speech Recognition (ASR)</h2>
+  <div class="row g-3 mb-5">
+    {% for m in asr_models %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <h6 class="card-title fw-semibold mb-1">{{ m.name }}</h6>
+          <p class="card-text text-muted small flex-grow-1">{{ m.desc }}</p>
+          <a href="{{ m.url }}" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-success mt-2">View on HuggingFace &rarr;</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
+
+  <!-- TTS & Other -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-volume-high text-warning me-2"></i>Text-to-Speech &amp; Other</h2>
+  <div class="row g-3 mb-5">
+    {% for m in other_models %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <h6 class="card-title fw-semibold mb-1">{{ m.name }}</h6>
+          <p class="card-text text-muted small flex-grow-1">{{ m.desc }}</p>
+          <a href="{{ m.url }}" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-warning mt-2">View on HuggingFace &rarr;</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Datasets -->
+  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-database text-secondary me-2"></i>Datasets</h2>
+  <div class="row g-3 mb-5">
+    {% for d in datasets %}
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100">
+        <div class="card-body d-flex flex-column">
+          <h6 class="card-title fw-semibold mb-1">{{ d.name }}</h6>
+          <p class="card-text text-muted small flex-grow-1">{{ d.desc }}</p>
+          <a href="{{ d.url }}" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-secondary mt-2">View on HuggingFace &rarr;</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <p class="text-muted small">
+    All models and datasets are openly licensed.
+    Browse the full collection at
+    <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">huggingface.co/mbazaNLP</a>
+    and <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener">github.com/MBAZA-NLP</a>.
+  </p>
 
 </div>
 {% endblock %}

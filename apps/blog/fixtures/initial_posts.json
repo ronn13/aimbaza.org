@@ -1,0 +1,15 @@
+[
+  {
+    "model": "blog.post",
+    "pk": 1,
+    "fields": {
+      "title": "Introducing aimbaza.org — the new MbazaNLP community hub",
+      "slug": "introducing-aimbaza-org",
+      "excerpt": "MbazaNLP has a new home. aimbaza.org brings together our models, datasets, events, and community resources in one place — built on Django and open-source from day one.",
+      "body": "MbazaNLP has been building open-source NLP tools for Kinyarwanda and East African languages since its founding. Until now, our community presence has been spread across GitHub, HuggingFace, and a static website that was difficult to keep up to date.\n\nToday we are launching aimbaza.org — a new community hub built on Django that brings everything together.\n\nWhat's on the site\n\nProjects & Models lists all 13 of our publicly available models across machine translation, speech recognition, text-to-speech, and conversational AI — all freely available on HuggingFace under open licences.\n\nOpportunities surfaces grants, fellowships, and computing access (including DFKI HPC) relevant to African language NLP researchers.\n\nEvents will track past and upcoming workshops, sprints, and community calls.\n\nThe Gallery captures photos from our community events, starting with the Bakame Hackathon in April 2023.\n\nContribute explains how to get involved — whether through data, code, documentation, or community support.\n\nServices & Offerings documents what MbazaNLP can offer to research partners and organisations looking to work with us.\n\nOpen infrastructure\n\nThe site is open-source and deployed from the MBAZA-NLP/aimbaza.org repository on GitHub. The CI/CD pipeline runs Black, Flake8, and automated tests on every pull request. We welcome contributions to the site itself — see the Contribute page for the pull request workflow.\n\nWhat's next\n\nIn the coming weeks we will be adding a community blog with release notes for our models, technical posts from community members, and an events calendar. We are also building a Slack news bot that will post weekly digests of upcoming events and opportunities directly to our community workspace.\n\nJoin us on Slack at aimbaza.slack.com or browse the models at huggingface.co/mbazaNLP.",
+      "author": "MbazaNLP Community",
+      "published": "2026-05-21",
+      "is_published": true
+    }
+  }
+]
