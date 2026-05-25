@@ -1,0 +1,98 @@
+# International events data — source of truth for the /events/ international section.
+#
+# pinned: true  — manually curated, never modified by fetch_events
+# pinned: false — managed by fetch_events management command
+#
+# Fields:
+#   id                  unique slug
+#   title               display name
+#   description         1-2 sentences
+#   url                 primary link
+#   location            city, country or "Virtual"
+#   deadline            ISO date (YYYY-MM-DD) for application/registration deadline (optional)
+#   has_sponsorship     bool — true if travel grants / scholarships are available
+#   sponsorship_details short text describing the sponsorship (optional)
+#   source              name of the RSS source or "manual"
+#   pinned              bool
+#   added_date          ISO date this entry was added
+#   active              bool — false hides from page
+
+- id: deep-learning-indaba-2026
+  title: Deep Learning Indaba 2026
+  description: >
+    Africa's largest deep learning conference, bringing together machine learning
+    researchers and practitioners from across the continent. Travel scholarships
+    available for African researchers.
+  url: https://deeplearningindaba.com
+  location: Africa (location TBC)
+  deadline: null
+  has_sponsorship: true
+  sponsorship_details: Travel scholarships available for African researchers and students.
+  source: manual
+  pinned: true
+  added_date: "2026-05-22"
+  active: true
+
+- id: indabax-2026
+  title: IndabaX Africa 2026
+  description: >
+    IndabaX events are community-organised deep learning workshops held across
+    African countries, affiliated with the Deep Learning Indaba. Many editions
+    offer local attendance grants.
+  url: https://deeplearningindaba.com/indabax/
+  location: Multiple African countries
+  deadline: null
+  has_sponsorship: true
+  sponsorship_details: Local attendance grants available at many IndabaX editions.
+  source: manual
+  pinned: true
+  added_date: "2026-05-22"
+  active: true
+
+- id: data-science-africa-2026
+  title: Data Science Africa 2026
+  description: >
+    Annual summer school and workshop series focused on machine learning and
+    data science for African development contexts. Financial support available
+    for participants from low-income backgrounds.
+  url: https://www.datascienceafrica.org
+  location: Africa (location TBC)
+  deadline: null
+  has_sponsorship: true
+  sponsorship_details: Financial support available for participants from low-income countries.
+  source: manual
+  pinned: true
+  added_date: "2026-05-22"
+  active: true
+
+- id: africanllp-acl-2026
+  title: AfricaNLP Workshop @ ACL 2026
+  description: >
+    The AfricaNLP workshop, co-located with major ACL conferences, focuses on
+    NLP research for African languages. D&I travel grants are available through
+    the ACL Diversity & Inclusion committee.
+  url: https://africanlp.github.io
+  location: Vienna, Austria
+  deadline: null
+  has_sponsorship: true
+  sponsorship_details: ACL D&I travel grants available — apply via the ACL D&I committee.
+  source: manual
+  pinned: true
+  added_date: "2026-05-22"
+  active: true
+
+- id: masakhane-research-collab-2026
+  title: Masakhane Research Collaboration Calls
+  description: >
+    Masakhane periodically opens collaboration calls for African language NLP
+    research. Funded participation and compute resources available for accepted
+    participants.
+  url: https://www.masakhane.io
+  location: Virtual / Africa
+  deadline: null
+  has_sponsorship: true
+  sponsorship_details: Funded participation and compute grants for accepted researchers.
+  source: manual
+  pinned: true
+  added_date: "2026-05-22"
+  active: true

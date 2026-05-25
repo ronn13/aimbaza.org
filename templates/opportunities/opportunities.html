@@ -9,134 +9,35 @@
   <h1 class="fw-bold mb-2">Opportunities</h1>
   <p class="lead text-muted mb-5">
     Grants, fellowships, computing resources, and collaboration calls open to MbazaNLP community members.
+    Updated weekly from community sources.
   </p>
 
-  <!-- Computing Access -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-server text-primary me-2"></i>Computing Access</h2>
+  {% for section in categories %}
+  <h2 class="h4 fw-semibold mb-3">
+    <i class="{{ section.icon }} text-{{ section.colour }} me-2"></i>{{ section.label|safe }}
+  </h2>
   <div class="row g-3 mb-5">
+    {% for opp in section.items %}
     <div class="col-md-6">
       <div class="card h-100">
         <div class="card-body">
-          <h6 class="fw-semibold">DFKI HPC Cluster</h6>
-          <p class="text-muted small">
-            MbazaNLP members can apply for access to the German Research Centre for Artificial Intelligence
-            (DFKI) High-Performance Computing cluster for NLP research and model training.
-          </p>
-          <a href="https://github.com/MBAZA-NLP/hpc-infrastructure-access"
-             target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary">
-            Apply via GitHub &rarr;
+          <h6 class="fw-semibold">{{ opp.title }}</h6>
+          <p class="text-muted small">{{ opp.description }}</p>
+          <a href="{{ opp.url }}" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-{{ section.colour }}">
+            {{ opp.button_text|default:"Learn more →" }}
           </a>
+          {% if not opp.pinned %}
+          <span class="badge bg-light text-secondary ms-2" style="font-size:0.7rem;">auto-updated</span>
+          {% endif %}
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">Google TPU Research Cloud</h6>
-          <p class="text-muted small">
-            Google offers free TPU access to researchers working on open-source NLP projects.
-            Academic and community applicants are eligible.
-          </p>
-          <a href="https://sites.research.google/trc/about/" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-primary">
-            Learn more &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
-
-  <!-- Grants & Funding -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-hand-holding-dollar text-success me-2"></i>Grants &amp; Funding</h2>
-  <div class="row g-3 mb-5">
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">Lacuna Fund</h6>
-          <p class="text-muted small">
-            Funds the creation of labelled training data for machine learning in the Global South,
-            with a focus on underrepresented languages including African languages.
-          </p>
-          <a href="https://lacunafund.org" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-success">Visit Lacuna Fund &rarr;</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">Mozilla Technology Fund</h6>
-          <p class="text-muted small">
-            Supports open-source projects and research that advance trustworthy AI and internet health,
-            including low-resource language technology.
-          </p>
-          <a href="https://foundation.mozilla.org/en/what-we-fund/awards/mozilla-technology-fund/"
-             target="_blank" rel="noopener" class="btn btn-sm btn-outline-success">
-            Learn more &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">AI4D Africa Grants</h6>
-          <p class="text-muted small">
-            The Artificial Intelligence for Development Africa initiative funds NLP and AI research
-            in African contexts, with grants for researchers and community organisations.
-          </p>
-          <a href="https://ai4d.ai" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-success">Visit AI4D &rarr;</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">GIZ Digital Transformation</h6>
-          <p class="text-muted small">
-            GIZ Rwanda's Digital Transformation Center supports digital public goods and
-            open-source community infrastructure in Rwanda.
-          </p>
-          <a href="https://www.giz.de/en/worldwide/33041.html" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-success">Learn more &rarr;</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Fellowships -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-user-graduate text-warning me-2"></i>Fellowships &amp; Residencies</h2>
-  <div class="row g-3 mb-5">
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">Masakhane Research Grants</h6>
-          <p class="text-muted small">
-            Masakhane, the pan-African NLP research community, periodically offers grants and
-            collaboration opportunities for African language NLP research.
-          </p>
-          <a href="https://www.masakhane.io" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-warning">Visit Masakhane &rarr;</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <div class="card h-100">
-        <div class="card-body">
-          <h6 class="fw-semibold">Google for Startups</h6>
-          <p class="text-muted small">
-            Google for Startups Africa offers equity-free funding, cloud credits, and mentorship
-            to startups building AI tools in Africa.
-          </p>
-          <a href="https://startup.google.com/programs/black-founders-fund/africa/"
-             target="_blank" rel="noopener" class="btn btn-sm btn-outline-warning">
-            Learn more &rarr;
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
+  {% empty %}
+  <p class="text-muted">No opportunities listed at the moment. Check back soon.</p>
+  {% endfor %}
 
   <div class="alert alert-light border mt-4">
     <i class="fab fa-slack me-2 text-primary"></i>

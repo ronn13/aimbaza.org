@@ -1,0 +1,40 @@
+name: Update Opportunities
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"  # every Monday at 06:00 UTC
+  workflow_dispatch:      # allow manual trigger from GitHub UI
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements/base.txt
+
+      - name: Fetch opportunities
+        run: python manage.py fetch_opportunities
+        env:
+          DJANGO_SETTINGS_MODULE: aimbaza.settings.development
+          SECRET_KEY: ci-only-not-a-real-secret-key
+          DATABASE_URL: sqlite:///ci_update.sqlite3
+
+      - name: Commit updated opportunities data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/opportunities/data/opportunities.yaml
+          git diff --cached --quiet || git commit -m "chore: weekly opportunities update [skip ci]"
+          git push origin develop

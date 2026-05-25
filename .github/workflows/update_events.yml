@@ -1,0 +1,40 @@
+name: Update Events
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"  # every Monday at 07:00 UTC (1 hour after update_opportunities)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements/base.txt
+
+      - name: Fetch international events
+        run: python manage.py fetch_events
+        env:
+          DJANGO_SETTINGS_MODULE: aimbaza.settings.development
+          SECRET_KEY: ci-only-not-a-real-secret-key
+          DATABASE_URL: sqlite:///ci_update.sqlite3
+
+      - name: Commit updated events data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add apps/events/data/international_events.yaml
+          git diff --cached --quiet || git commit -m "chore: weekly events update [skip ci]"
+          git push origin develop

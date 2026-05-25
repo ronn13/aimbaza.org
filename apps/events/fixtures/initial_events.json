@@ -5,9 +5,34 @@
     "fields": {
       "title": "Bakame Community Hackathon",
       "date": "2023-04-22",
+      "end_date": "2023-04-23",
       "location": "Kigali, Rwanda",
       "description": "A community hackathon and showcase event bringing together MbazaNLP contributors to demo the Bakame chatbot and discuss the roadmap for Kinyarwanda NLP tooling.",
       "url": ""
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 2,
+    "fields": {
+      "title": "MbazaNLP Community Sprint — June 2026",
+      "date": "2026-06-14",
+      "end_date": "2026-06-15",
+      "location": "Kigali, Rwanda",
+      "description": "A two-day community sprint focused on model evaluation, dataset contributions, and onboarding new contributors. Open to all skill levels — NLP researchers, developers, and translators all welcome.",
+      "url": "https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+    }
+  },
+  {
+    "model": "events.event",
+    "pk": 3,
+    "fields": {
+      "title": "MbazaNLP @ IndabaX Rwanda 2024",
+      "date": "2024-06-08",
+      "end_date": null,
+      "location": "Kigali, Rwanda",
+      "description": "MbazaNLP community members presented open-source Kinyarwanda NLP work at IndabaX Rwanda, the local edition of the Deep Learning Indaba.",
+      "url": "https://deeplearningindaba.com/indabax/"
     }
   }
 ]

@@ -1,88 +1,262 @@
 {% extends "base.html" %}
 
 {% block title %}Events{% endblock %}
-{% block description %}MBAZA-NLP community events — workshops, sprints, and community calls{% endblock %}
+{% block description %}MbazaNLP community events calendar and international AI/NLP events with sponsorship opportunities in Africa{% endblock %}
 
 {% block content %}
 <div class="container py-5">
 
   <h1 class="fw-bold mb-2">Events</h1>
   <p class="lead text-muted mb-5">
-    Workshops, data sprints, research seminars, and community calls hosted by MbazaNLP.
+    Community events calendar and international AI&nbsp;/ NLP opportunities in Africa —
+    updated weekly, with sponsored &amp; grant-funded events highlighted.
   </p>
 
-  {% if upcoming %}
-  <h2 class="h4 fw-semibold mb-3">Upcoming Events</h2>
-  <div class="row g-4 mb-5">
-    {% for event in upcoming %}
-    <div class="col-md-6">
-      <div class="card h-100 border-primary">
-        <div class="card-body">
-          <span class="badge bg-primary mb-2">Upcoming</span>
-          <h5 class="card-title fw-semibold">{{ event.title }}</h5>
-          <p class="text-muted mb-1">
-            <i class="fas fa-calendar me-1"></i> {{ event.date|date:"j F Y" }}
-            {% if event.location %}
-            &nbsp;&middot;&nbsp;<i class="fas fa-location-dot me-1"></i> {{ event.location }}
-            {% endif %}
-          </p>
-          {% if event.description %}
-          <p class="card-text mt-2">{{ event.description }}</p>
-          {% endif %}
-          {% if event.url %}
-          <a href="{{ event.url }}" target="_blank" rel="noopener" class="btn btn-sm btn-primary mt-2">
-            More info &rarr;
-          </a>
-          {% endif %}
+  {# ── COMMUNITY EVENTS CALENDAR ─────────────────────────────────────── #}
+  <section class="mb-5">
+    <h2 class="h4 fw-semibold mb-4">
+      <i class="fas fa-calendar-alt text-primary me-2"></i>Community Events
+    </h2>
+
+    <div class="row g-3 mb-4">
+      {% for month in calendar_months %}
+      <div class="col-lg-4 col-md-12">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header bg-primary text-white text-center fw-semibold py-2">
+            {{ month.name }}
+          </div>
+          <div class="card-body p-2">
+            <table class="table table-borderless table-sm mb-0 text-center" style="font-size:0.85rem;">
+              <thead>
+                <tr>
+                  {% for h in month.day_headers %}
+                  <th class="text-muted fw-normal py-1" style="width:14.28%;">{{ h }}</th>
+                  {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                {% for week in month.weeks %}
+                <tr>
+                  {% for cell in week %}
+                  <td class="py-1 position-relative
+                      {% if cell.is_today %}fw-bold{% endif %}
+                      {% if not cell.day %}text-muted{% endif %}">
+                    {% if cell.day %}
+                      {% if cell.is_today %}
+                        <span class="badge bg-primary rounded-circle" style="padding:0.3em 0.45em;">
+                          {{ cell.day }}
+                        </span>
+                      {% else %}
+                        {{ cell.day }}
+                      {% endif %}
+                      {% if cell.events %}
+                      <span class="position-absolute"
+                            style="width:5px;height:5px;background:#0d6efd;border-radius:50%;
+                                   bottom:2px;left:50%;transform:translateX(-50%);"
+                            title="{{ cell.events|length }} event{% if cell.events|length > 1 %}s{% endif %}">
+                      </span>
+                      {% endif %}
+                    {% endif %}
+                  </td>
+                  {% endfor %}
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-  {% else %}
-  <div class="alert alert-info mb-5" role="alert">
-    <i class="fas fa-calendar me-2"></i>
-    <strong>No upcoming events scheduled.</strong>
-    Join our Slack to be the first to hear about new events.
-  </div>
-  {% endif %}
 
-  <div class="mb-4">
+    {% if inhouse_upcoming %}
+    <h3 class="h6 fw-semibold text-uppercase text-muted mb-3">Upcoming</h3>
+    <div class="row g-3">
+      {% for event in inhouse_upcoming %}
+      <div class="col-md-6">
+        <div class="card border-start border-primary border-3 h-100">
+          <div class="card-body py-3">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h6 class="fw-semibold mb-1">{{ event.title }}</h6>
+                {% if event.location %}
+                <p class="text-muted small mb-1">
+                  <i class="fas fa-map-marker-alt me-1"></i>{{ event.location }}
+                </p>
+                {% endif %}
+                {% if event.description %}
+                <p class="text-muted small mb-2">{{ event.description }}</p>
+                {% endif %}
+                {% if event.url %}
+                <a href="{{ event.url }}" target="_blank" rel="noopener"
+                   class="btn btn-sm btn-outline-primary">Details &rarr;</a>
+                {% endif %}
+              </div>
+              <div class="text-end text-nowrap ms-3">
+                <div class="fw-bold text-primary" style="font-size:1.4rem;line-height:1;">
+                  {{ event.date|date:"d" }}
+                </div>
+                <div class="text-muted small">{{ event.date|date:"M Y" }}</div>
+                {% if event.is_multi_day %}
+                <div class="text-muted" style="font-size:0.7rem;">– {{ event.end_date|date:"d M" }}</div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-light border">
+      No community events scheduled yet.
+      <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+         target="_blank" rel="noopener">Join Slack</a> to stay updated.
+    </div>
+    {% endif %}
+
+    {% if inhouse_past %}
+    <div class="mt-3">
+      <button class="btn btn-link btn-sm text-muted p-0" type="button"
+              data-bs-toggle="collapse" data-bs-target="#pastEvents">
+        <i class="fas fa-history me-1"></i>Past events
+      </button>
+      <div class="collapse mt-2" id="pastEvents">
+        <ul class="list-group list-group-flush">
+          {% for event in inhouse_past %}
+          <li class="list-group-item px-0 py-2 d-flex justify-content-between align-items-center">
+            <span class="small">
+              {% if event.url %}<a href="{{ event.url }}" target="_blank" rel="noopener">{% endif %}
+                {{ event.title }}
+              {% if event.url %}</a>{% endif %}
+              {% if event.location %}<span class="text-muted ms-1">— {{ event.location }}</span>{% endif %}
+            </span>
+            <span class="text-muted small text-nowrap ms-3">{{ event.date|date:"d M Y" }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+  </section>
+
+  <hr class="my-5">
+
+  {# ── INTERNATIONAL EVENTS ──────────────────────────────────────────── #}
+  <section>
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+      <h2 class="h4 fw-semibold mb-0">
+        <i class="fas fa-globe-africa text-success me-2"></i>International Events
+        <span class="badge bg-light text-muted fw-normal ms-1" style="font-size:0.7rem;">
+          updated weekly
+        </span>
+      </h2>
+      <div class="form-check form-switch mb-0">
+        <input class="form-check-input" type="checkbox" id="sponsoredOnly"
+               onchange="filterSponsored(this)">
+        <label class="form-check-label small" for="sponsoredOnly">
+          <i class="fas fa-star text-warning me-1"></i>Sponsored / grant events only
+        </label>
+      </div>
+    </div>
+
+    {% if sponsored_events %}
+    <h3 class="h6 fw-semibold text-uppercase text-muted mb-3">
+      <i class="fas fa-star text-warning me-1"></i>With Sponsorship or Travel Grants
+    </h3>
+    <div class="row g-3 mb-5">
+      {% for event in sponsored_events %}
+      <div class="col-md-6 event-sponsored">
+        <div class="card h-100 border-warning border-2">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-1">
+              <h6 class="fw-semibold mb-0">{{ event.title }}</h6>
+              <span class="badge bg-warning text-dark ms-2 flex-shrink-0" style="font-size:0.7rem;">
+                <i class="fas fa-star me-1"></i>Sponsored
+              </span>
+            </div>
+            {% if event.location %}
+            <p class="text-muted small mb-1">
+              <i class="fas fa-map-marker-alt me-1"></i>{{ event.location }}
+            </p>
+            {% endif %}
+            {% if event.deadline %}
+            <p class="text-danger small mb-1">
+              <i class="fas fa-clock me-1"></i>Deadline: {{ event.deadline }}
+            </p>
+            {% endif %}
+            <p class="text-muted small mb-2">{{ event.description }}</p>
+            {% if event.sponsorship_details %}
+            <div class="alert alert-warning py-1 px-2 mb-2" style="font-size:0.8rem;">
+              <i class="fas fa-info-circle me-1"></i>{{ event.sponsorship_details }}
+            </div>
+            {% endif %}
+            <div class="d-flex justify-content-between align-items-center">
+              <a href="{{ event.url }}" target="_blank" rel="noopener"
+                 class="btn btn-sm btn-warning">Apply / Learn more &rarr;</a>
+              <span class="text-muted" style="font-size:0.7rem;">via {{ event.source }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div id="otherEventsBlock">
+      {% if other_events %}
+      <h3 class="h6 fw-semibold text-uppercase text-muted mb-3">Other Events</h3>
+      <div class="row g-3">
+        {% for event in other_events %}
+        <div class="col-md-6 event-other">
+          <div class="card h-100">
+            <div class="card-body">
+              <h6 class="fw-semibold mb-1">{{ event.title }}</h6>
+              {% if event.location %}
+              <p class="text-muted small mb-1">
+                <i class="fas fa-map-marker-alt me-1"></i>{{ event.location }}
+              </p>
+              {% endif %}
+              {% if event.deadline %}
+              <p class="text-danger small mb-1">
+                <i class="fas fa-clock me-1"></i>Deadline: {{ event.deadline }}
+              </p>
+              {% endif %}
+              <p class="text-muted small mb-2">{{ event.description }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <a href="{{ event.url }}" target="_blank" rel="noopener"
+                   class="btn btn-sm btn-outline-success">Learn more &rarr;</a>
+                <span class="text-muted" style="font-size:0.7rem;">via {{ event.source }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    {% if not sponsored_events and not other_events %}
+    <div class="alert alert-light border">
+      No international events found yet — check back after the next weekly update (Mondays).
+    </div>
+    {% endif %}
+  </section>
+
+  <div class="alert alert-light border mt-5">
+    <i class="fab fa-slack me-2 text-primary"></i>
+    Events and sponsorship opportunities are also shared in <strong>#opportunities</strong>
+    on our Slack workspace.
     <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
-       target="_blank" rel="noopener" class="btn btn-outline-primary">
-      <i class="fab fa-slack me-2"></i>Join Slack for event announcements
-    </a>
+       target="_blank" rel="noopener">Join Slack &rarr;</a>
   </div>
-
-  {% if past %}
-  <h2 class="h4 fw-semibold mt-5 mb-3">Past Events</h2>
-  <div class="row g-4">
-    {% for event in past %}
-    <div class="col-md-6">
-      <div class="card h-100 bg-light">
-        <div class="card-body">
-          <span class="badge bg-secondary mb-2">Past</span>
-          <h5 class="card-title fw-semibold">{{ event.title }}</h5>
-          <p class="text-muted mb-1">
-            <i class="fas fa-calendar me-1"></i> {{ event.date|date:"j F Y" }}
-            {% if event.location %}
-            &nbsp;&middot;&nbsp;<i class="fas fa-location-dot me-1"></i> {{ event.location }}
-            {% endif %}
-          </p>
-          {% if event.description %}
-          <p class="card-text mt-2">{{ event.description }}</p>
-          {% endif %}
-          {% if event.url %}
-          <a href="{{ event.url }}" target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary mt-2">
-            View recap &rarr;
-          </a>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
 
 </div>
+
+<script>
+function filterSponsored(checkbox) {
+  document.getElementById('otherEventsBlock').style.display =
+    checkbox.checked ? 'none' : '';
+}
+</script>
 {% endblock %}
