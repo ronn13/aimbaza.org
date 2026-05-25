@@ -17,18 +17,6 @@
 #   added_date  ISO date this entry was added (YYYY-MM-DD)
 #   active      bool — set to false to hide from the page without deleting
 
-- id: dfki-hpc
-  title: DFKI HPC Cluster
-  category: computing
-  description: >
-    The German Research Center for AI (DFKI) provides High-Performance Computing access
-    to African NLP research communities. MbazaNLP has a standing relationship with DFKI
-    through the GIZ partnership — contact the community to apply.
-  url: https://www.dfki.de/en/web/research/research-departments/software-engineering-and-information-systems
-  button_text: Contact community →
-  pinned: true
-  added_date: "2026-05-25"
-  active: true
 
 - id: google-tpu
   title: Google TPU Research Cloud
