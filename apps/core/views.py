@@ -14,6 +14,10 @@ def services(request):
     return render(request, "core/services.html")
 
 
+def demos(request):
+    return render(request, "core/demos.html")
+
+
 def robots_txt(request):
     lines = [
         "User-agent: *",

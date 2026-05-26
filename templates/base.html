@@ -86,6 +86,10 @@
                href="{% url 'core:services' %}">Services</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'demos' %}active{% endif %}"
+               href="{% url 'core:demos' %}">Demos</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link {% if request.resolver_match.app_name == 'community' %}active{% endif %}"
                href="{% url 'community:index' %}">Community</a>
           </li>

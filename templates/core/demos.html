@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Demos{% endblock %}
+{% block description %}Runnable demonstrations of MbazaNLP models — translation, speech recognition, and more. Install scripts and Jupyter notebooks included.{% endblock %}
+
+{% block extra_css %}
+<style>
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    font-size: 0.875rem;
+    overflow-x: auto;
+  }
+  code {
+    font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+  }
+  pre code { color: inherit; background: none; padding: 0; }
+  .demo-badge {
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.25em 0.6em;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <h1 class="fw-bold mb-2">Demos</h1>
+  <p class="lead text-muted mb-5">
+    Runnable demonstrations of MbazaNLP models. Each demo includes a command-line script,
+    a Jupyter notebook, and full install instructions.
+  </p>
+
+  {# ── DEMO 1: TRANSLATION ───────────────────────────────────────────── #}
+  <div class="card border-0 shadow-sm mb-5">
+    <div class="card-body p-4 p-md-5">
+
+      <div class="d-flex align-items-start justify-content-between flex-wrap gap-3 mb-4">
+        <div>
+          <span class="badge bg-primary demo-badge mb-2">Demo #1</span>
+          <h2 class="h3 fw-bold mb-1">English ↔ Kinyarwanda Translation</h2>
+          <p class="text-muted mb-0">
+            Fine-tuned NLLB-200 models for general, education, and tourism domains.
+            Works offline once models are downloaded.
+          </p>
+        </div>
+        <div class="d-flex gap-2 flex-shrink-0">
+          <a href="https://github.com/ronn13/aimbaza.org/tree/main/demos/translation"
+             target="_blank" rel="noopener" class="btn btn-sm btn-outline-dark">
+            <i class="fab fa-github me-1"></i>GitHub
+          </a>
+          <a href="https://huggingface.co/mbazaNLP/Nllb_finetuned_general_en_kin"
+             target="_blank" rel="noopener" class="btn btn-sm btn-outline-secondary">
+            <i class="fas fa-circle-nodes me-1"></i>HuggingFace
+          </a>
+        </div>
+      </div>
+
+      {# Models #}
+      <h3 class="h6 fw-semibold text-uppercase text-muted mb-3">Models</h3>
+      <div class="row g-3 mb-4">
+        <div class="col-md-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body py-3">
+              <div class="fw-semibold mb-1">General</div>
+              <code class="small text-muted">Nllb_finetuned_general_en_kin</code>
+              <p class="text-muted small mt-2 mb-0">Everyday text and mixed-domain content.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body py-3">
+              <div class="fw-semibold mb-1">Education</div>
+              <code class="small text-muted">Nllb_finetuned_education_en_kin</code>
+              <p class="text-muted small mt-2 mb-0">Academic, instructional, and curriculum text.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 border-0 bg-light">
+            <div class="card-body py-3">
+              <div class="fw-semibold mb-1">Tourism</div>
+              <code class="small text-muted">Nllb_finetuned_tourism_en_kin</code>
+              <p class="text-muted small mt-2 mb-0">Travel, hospitality, and cultural content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {# Requirements #}
+      <h3 class="h6 fw-semibold text-uppercase text-muted mb-2">Requirements</h3>
+      <ul class="text-muted small mb-4">
+        <li>Python 3.9+</li>
+        <li>~3 GB disk space per model (downloaded automatically on first run and cached)</li>
+        <li>GPU optional — CPU inference works but is slower</li>
+      </ul>
+
+      {# Quick start #}
+      <h3 class="h6 fw-semibold text-uppercase text-muted mb-2">Quick Start</h3>
+      <pre><code># 1. Clone the repository
+git clone https://github.com/ronn13/aimbaza.org.git
+cd aimbaza.org/demos/translation
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Translate
+python translate.py "Hello, how are you?"</code></pre>
+
+      <p class="text-muted small mt-2 mb-4">
+        Models are downloaded from HuggingFace automatically on first use
+        and cached in <code>~/.cache/huggingface/</code>.
+      </p>
+
+      {# CLI usage #}
+      <h3 class="h6 fw-semibold text-uppercase text-muted mb-2">CLI Usage</h3>
+      <pre><code># English → Kinyarwanda (default)
+python translate.py "The student passed the exam."
+
+# Kinyarwanda → English
+python translate.py "Muraho, amakuru?" --src kin_Latn --tgt eng_Latn
+
+# Choose a domain model
+python translate.py "Book a room near the national park." --domain tourism
+python translate.py "Submit your assignment before the deadline." --domain education</code></pre>
+
+      <div class="table-responsive mt-3 mb-4">
+        <table class="table table-sm table-bordered small">
+          <thead class="table-light">
+            <tr>
+              <th>Flag</th>
+              <th>Default</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>--src</code></td>
+              <td><code>eng_Latn</code></td>
+              <td><code>eng_Latn</code> (English) · <code>kin_Latn</code> (Kinyarwanda)</td>
+            </tr>
+            <tr>
+              <td><code>--tgt</code></td>
+              <td><code>kin_Latn</code></td>
+              <td><code>eng_Latn</code> (English) · <code>kin_Latn</code> (Kinyarwanda)</td>
+            </tr>
+            <tr>
+              <td><code>--domain</code></td>
+              <td><code>general</code></td>
+              <td><code>general</code> · <code>education</code> · <code>tourism</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {# Notebook #}
+      <h3 class="h6 fw-semibold text-uppercase text-muted mb-2">Jupyter Notebook</h3>
+      <p class="text-muted small mb-2">
+        The notebook <code>translation_demo.ipynb</code> walks through English→Kinyarwanda,
+        Kinyarwanda→English, domain comparison across all three models, batch translation,
+        and an interactive translation cell.
+      </p>
+      <pre><code>pip install jupyter
+jupyter notebook demos/translation/translation_demo.ipynb</code></pre>
+
+      <div class="mt-4 pt-3 border-top d-flex align-items-center gap-3 flex-wrap">
+        <a href="https://github.com/ronn13/aimbaza.org/tree/main/demos/translation"
+           target="_blank" rel="noopener" class="btn btn-primary">
+          <i class="fab fa-github me-2"></i>View on GitHub
+        </a>
+        <a href="https://huggingface.co/mbazaNLP/Nllb_finetuned_general_en_kin"
+           target="_blank" rel="noopener" class="btn btn-outline-secondary">
+          <i class="fas fa-circle-nodes me-2"></i>General model on HuggingFace
+        </a>
+        <span class="text-muted small ms-auto">Apache 2.0 licence</span>
+      </div>
+
+    </div>
+  </div>
+
+  {# ── COMING SOON ───────────────────────────────────────────────────── #}
+  <div class="card border-0 bg-light mb-5">
+    <div class="card-body p-4">
+      <span class="badge bg-secondary demo-badge mb-2">Demo #2</span>
+      <h2 class="h4 fw-semibold mb-1 text-muted">Coming after the June 2026 sprint</h2>
+      <p class="text-muted mb-0">
+        A second demonstrator will be published following the community sprint on
+        14–15 June 2026. Topic will be determined by sprint participants.
+        <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+           target="_blank" rel="noopener">Join Slack</a> to take part.
+      </p>
+    </div>
+  </div>
+
+  {# ── CONTRIBUTE A DEMO ─────────────────────────────────────────────── #}
+  <div class="alert alert-light border">
+    <i class="fas fa-code me-2 text-primary"></i>
+    <strong>Want to add a demo?</strong>
+    Each demo needs a CLI script, a requirements file, and a README. See the
+    <a href="{% url 'core:contribute' %}">Contribute page</a> for the PR workflow,
+    or post in <strong>#models</strong> on
+    <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+       target="_blank" rel="noopener">Slack</a>.
+  </div>
+
+</div>
+{% endblock %}
