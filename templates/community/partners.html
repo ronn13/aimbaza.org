@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block title %}Partners{% endblock %}
+{% block description %}MbazaNLP's partner organisations — funders, data partners, research collaborators, and community allies working on African language AI.{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'community:index' %}">Community</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Partners</li>
+    </ol>
+  </nav>
+
+  <h1 class="fw-bold mb-2">Partner Registry</h1>
+  <p class="lead text-muted mb-5">
+    Organisations that fund, collaborate with, or otherwise support MbazaNLP's work
+    on open-source Kinyarwanda and East African language AI.
+  </p>
+
+  {# ── PARTNER CARDS ─────────────────────────────────────────────────── #}
+  <div class="row g-4 mb-6">
+    {% for partner in partners %}
+    <div class="col-md-6">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex align-items-start justify-content-between mb-3">
+            <div class="fw-bold fs-5">{{ partner.name }}</div>
+            <span class="badge bg-{{ partner.type_colour }} ms-3 flex-shrink-0" style="font-size:0.72rem;">
+              <i class="{{ partner.type_icon }} me-1"></i>{{ partner.type_label }}
+            </span>
+          </div>
+          <p class="text-muted mb-3">{{ partner.description }}</p>
+          <a href="{{ partner.url }}" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-{{ partner.type_colour }}">
+            Visit {{ partner.logo_text }} &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">No partners listed yet.</p>
+    {% endfor %}
+  </div>
+
+  <hr class="my-5">
+
+  {# ── COLLABORATION CALENDAR ────────────────────────────────────────── #}
+  <h2 class="h4 fw-semibold mb-4">
+    <i class="fas fa-calendar-check text-primary me-2"></i>Collaboration Calendar
+  </h2>
+
+  {% if calendar %}
+  <div class="row g-3">
+    {% for item in calendar %}
+    <div class="col-12">
+      <div class="card border-start border-{{ item.type_colour }} border-3 h-100">
+        <div class="card-body py-3">
+          <div class="row align-items-center">
+
+            <div class="col-md-2 text-md-center mb-2 mb-md-0">
+              <div class="fw-bold text-{{ item.type_colour }}" style="font-size:1.5rem;line-height:1;">
+                {{ item.date|date:"d" }}
+              </div>
+              <div class="text-muted small">{{ item.date|date:"M Y" }}</div>
+              {% if item.end_date %}
+              <div class="text-muted" style="font-size:0.75rem;">– {{ item.end_date|date:"d M" }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-7 mb-2 mb-md-0">
+              <div class="d-flex align-items-center gap-2 mb-1">
+                <span class="badge bg-{{ item.type_colour }}" style="font-size:0.68rem;">
+                  <i class="{{ item.type_icon }} me-1"></i>{{ item.type_label }}
+                </span>
+                <span class="fw-semibold">{{ item.title }}</span>
+              </div>
+              <p class="text-muted small mb-1">{{ item.description }}</p>
+              {% if item.partners %}
+              <div class="d-flex flex-wrap gap-1 mt-1">
+                {% for p in item.partners %}
+                <span class="badge bg-light text-secondary border" style="font-size:0.7rem;">
+                  {{ p.logo_text }}
+                </span>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-3 text-md-end">
+              {% if item.url %}
+              <a href="{{ item.url }}" target="_blank" rel="noopener"
+                 class="btn btn-sm btn-outline-{{ item.type_colour }}">
+                Details &rarr;
+              </a>
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-light border">No collaboration activities scheduled yet.</div>
+  {% endif %}
+
+  <hr class="my-5">
+
+  {# ── BECOME A PARTNER ──────────────────────────────────────────────── #}
+  <div class="card border-0 bg-light">
+    <div class="card-body p-4">
+      <h3 class="h5 fw-semibold mb-2">
+        <i class="fas fa-handshake text-primary me-2"></i>Collaborate with MbazaNLP
+      </h3>
+      <p class="text-muted mb-3">
+        We welcome collaboration with research institutions, development organisations,
+        language communities, and companies working on African language technology.
+        Collaboration can take many forms: joint data collection, shared model development,
+        co-authored research, grant applications, or community events.
+      </p>
+      <a href="mailto:mbazanlp.community@gmail.com" class="btn btn-primary me-2">
+        <i class="fas fa-envelope me-1"></i>Get in touch
+      </a>
+      <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+         target="_blank" rel="noopener" class="btn btn-outline-secondary">
+        <i class="fab fa-slack me-1"></i>Join Slack
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

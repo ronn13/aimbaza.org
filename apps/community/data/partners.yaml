@@ -1,0 +1,71 @@
+# Partner registry — source of truth for /community/partners/
+#
+# Fields:
+#   id            unique slug
+#   name          display name
+#   type          funding | data | research | community
+#   description   2-3 sentences on the relationship and collaboration
+#   url           partner website
+#   logo_text     short text shown in place of a logo image
+#   active        bool — false hides from page
+
+- id: giz
+  name: GIZ Digital Transformation Center Rwanda
+  type: funding
+  description: >
+    The Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) funds MbazaNLP's
+    community infrastructure work through the Digital Transformation Center Rwanda
+    (contract G-011174-077). GIZ's support covers website development, community
+    engineering standards, model documentation, and community events through the
+    DPG (Digital Public Good) maintainer programme.
+  url: https://www.giz.de/en/worldwide/33041.html
+  logo_text: GIZ
+  active: true
+
+- id: digital-umuganda
+  name: Digital Umuganda
+  type: data
+  description: >
+    Digital Umuganda is a community-driven initiative that collects and open-sources
+    Kinyarwanda language data through collaborative crowdsourcing. MbazaNLP's translation
+    and speech models draw on data collected through Digital Umuganda campaigns, and the
+    two communities share contributors and coordinate data collection sprints.
+  url: https://digitalumuganda.com
+  logo_text: Digital Umuganda
+  active: true
+
+- id: fairforward
+  name: FairForward
+  type: research
+  description: >
+    FairForward is a GIZ initiative working to make AI more open, fair, and accessible
+    in the Global South. FairForward supports MbazaNLP's work on responsible AI practices
+    for low-resource African languages, including model documentation standards, bias
+    disclosure, and the open licensing of all community outputs under Apache 2.0 and CC-BY.
+  url: https://fair-forward.github.io
+  logo_text: FairForward
+  active: true
+
+- id: masakhane
+  name: Masakhane
+  type: community
+  description: >
+    Masakhane is a pan-African NLP research community focused on African languages.
+    MbazaNLP collaborates with Masakhane on research methodology, evaluation benchmarks,
+    and grant applications. Community members participate in Masakhane research calls and
+    contribute to shared datasets and models for East African languages.
+  url: https://www.masakhane.io
+  logo_text: Masakhane
+  active: true
+
+- id: cmu-africa
+  name: Carnegie Mellon University Africa
+  type: research
+  description: >
+    CMU Africa's graduate programme in Engineering AI in Kigali provides a pipeline of
+    NLP researchers and engineers engaged with MbazaNLP's work. Community members have
+    drawn on CMU Africa's computing resources and research expertise for model development
+    and evaluation on Kinyarwanda benchmarks.
+  url: https://www.africa.engineering.cmu.edu
+  logo_text: CMU Africa
+  active: true
