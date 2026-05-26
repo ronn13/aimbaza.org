@@ -28,27 +28,78 @@ DATA_FILE = pathlib.Path(__file__).parents[4] / "data" / "international_events.y
 
 # At least one Africa keyword AND one NLP/AI keyword must appear.
 AFRICA_KEYWORDS = [
-    "africa", "african", "rwanda", "kenya", "nigeria", "ghana", "ethiopia",
-    "uganda", "tanzania", "senegal", "ivory coast", "côte d'ivoire",
-    "nairobi", "kigali", "lagos", "addis ababa", "abuja", "accra", "dakar",
-    "cape town", "johannesburg", "cairo", "kampala", "dar es salaam",
-    "indaba", "masakhane", "africanlp", "ai4d",
+    "africa",
+    "african",
+    "rwanda",
+    "kenya",
+    "nigeria",
+    "ghana",
+    "ethiopia",
+    "uganda",
+    "tanzania",
+    "senegal",
+    "ivory coast",
+    "côte d'ivoire",
+    "nairobi",
+    "kigali",
+    "lagos",
+    "addis ababa",
+    "abuja",
+    "accra",
+    "dakar",
+    "cape town",
+    "johannesburg",
+    "cairo",
+    "kampala",
+    "dar es salaam",
+    "indaba",
+    "masakhane",
+    "africanlp",
+    "ai4d",
 ]
 
 NLP_AI_KEYWORDS = [
-    "nlp", "natural language", "machine learning", "deep learning",
-    "artificial intelligence", " ai ", "language model", "llm",
-    "computational linguistics", "speech recognition", "machine translation",
-    "named entity", "sentiment analysis", "text classification",
-    "neural network", "transformer", "bert", "low-resource",
-    "multilingual", "kinyarwanda", "swahili", "amharic", "hausa",
+    "nlp",
+    "natural language",
+    "machine learning",
+    "deep learning",
+    "artificial intelligence",
+    " ai ",
+    "language model",
+    "llm",
+    "computational linguistics",
+    "speech recognition",
+    "machine translation",
+    "named entity",
+    "sentiment analysis",
+    "text classification",
+    "neural network",
+    "transformer",
+    "bert",
+    "low-resource",
+    "multilingual",
+    "kinyarwanda",
+    "swahili",
+    "amharic",
+    "hausa",
 ]
 
 SPONSORSHIP_KEYWORDS = [
-    "travel grant", "scholarship", "sponsored", "financial support",
-    "stipend", "bursary", "funded participation", "fellowship",
-    "grant for attendance", "d&i", "diversity", "financial assistance",
-    "registration fee waiver", "free registration", "sponsored attendance",
+    "travel grant",
+    "scholarship",
+    "sponsored",
+    "financial support",
+    "stipend",
+    "bursary",
+    "funded participation",
+    "fellowship",
+    "grant for attendance",
+    "d&i",
+    "diversity",
+    "financial assistance",
+    "registration fee waiver",
+    "free registration",
+    "sponsored attendance",
 ]
 
 RSS_SOURCES = [
@@ -147,7 +198,9 @@ class Command(BaseCommand):
         added = []
 
         for source in RSS_SOURCES:
-            self.stdout.write(f"Fetching {source['source_name']} ({source['rss_url']}) ...")
+            self.stdout.write(
+                f"Fetching {source['source_name']} ({source['rss_url']}) ..."
+            )
             try:
                 feed = feedparser.parse(source["rss_url"])
             except Exception as exc:

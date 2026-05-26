@@ -79,9 +79,7 @@ def _slugify(text):
 
 
 def _is_opportunity(entry):
-    haystack = (
-        (entry.get("title") or "") + " " + (entry.get("summary") or "")
-    ).lower()
+    haystack = ((entry.get("title") or "") + " " + (entry.get("summary") or "")).lower()
     return any(kw in haystack for kw in OPPORTUNITY_KEYWORDS)
 
 
@@ -170,7 +168,9 @@ class Command(BaseCommand):
                     sort_keys=False,
                 )
             self.stdout.write(
-                self.style.SUCCESS(f"Done — {len(added)} new entries written to {DATA_FILE}")
+                self.style.SUCCESS(
+                    f"Done — {len(added)} new entries written to {DATA_FILE}"
+                )
             )
         else:
             self.stdout.write(f"[dry-run] {len(added)} entries would be added.")

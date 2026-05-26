@@ -2,9 +2,7 @@ import pathlib
 import yaml
 from django.shortcuts import render
 
-_DATA_FILE = (
-    pathlib.Path(__file__).parent / "data" / "opportunities.yaml"
-)
+_DATA_FILE = pathlib.Path(__file__).parent / "data" / "opportunities.yaml"
 _CATEGORY_ORDER = ["computing", "grants", "fellowships"]
 _CATEGORY_LABELS = {
     "computing": ("Computing Access", "fas fa-server", "primary"),

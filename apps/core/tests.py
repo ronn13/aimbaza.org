@@ -62,3 +62,14 @@ class SmokeTests(TestCase):
 
     def test_sitemap(self):
         self._ok("/sitemap.xml")
+
+    def test_demos(self):
+        self._ok("/demos/")
+
+    def test_about_redirects(self):
+        resp = self.client.get("/about/")
+        self.assertIn(resp.status_code, (301, 302))
+        self.assertEqual(resp["Location"], "/")
+
+    def test_community_partners(self):
+        self._ok("/community/partners/")

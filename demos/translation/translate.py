@@ -71,7 +71,9 @@ def main():
     if args.src == args.tgt:
         parser.error("Source and target language must be different.")
 
-    result = translate(args.text, src_lang=args.src, tgt_lang=args.tgt, domain=args.domain)
+    result = translate(
+        args.text, src_lang=args.src, tgt_lang=args.tgt, domain=args.domain
+    )
 
     src_label = LANG_LABELS[args.src]
     tgt_label = LANG_LABELS[args.tgt]

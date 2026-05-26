@@ -10,8 +10,19 @@ from .models import Event
 _DATA_FILE = pathlib.Path(__file__).parent / "data" / "international_events.yaml"
 
 MONTH_NAMES = [
-    "", "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
 ]
 DAY_HEADERS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -34,19 +45,23 @@ def _build_calendar(today, inhouse_events, n_months=3):
                     row.append({"day": None, "events": [], "is_today": False})
                 else:
                     d = datetime.date(year, month, day)
-                    row.append({
-                        "day": day,
-                        "date": d,
-                        "events": events_by_date.get(d, []),
-                        "is_today": d == today,
-                    })
+                    row.append(
+                        {
+                            "day": day,
+                            "date": d,
+                            "events": events_by_date.get(d, []),
+                            "is_today": d == today,
+                        }
+                    )
             annotated.append(row)
 
-        months.append({
-            "name": f"{MONTH_NAMES[month]} {year}",
-            "weeks": annotated,
-            "day_headers": DAY_HEADERS,
-        })
+        months.append(
+            {
+                "name": f"{MONTH_NAMES[month]} {year}",
+                "weeks": annotated,
+                "day_headers": DAY_HEADERS,
+            }
+        )
         month += 1
         if month > 12:
             month = 1
@@ -80,11 +95,15 @@ def index(request):
     sponsored = [e for e in international if e.get("has_sponsorship")]
     other = [e for e in international if not e.get("has_sponsorship")]
 
-    return render(request, "events/events.html", {
-        "calendar_months": calendar_months,
-        "inhouse_upcoming": inhouse_upcoming,
-        "inhouse_past": inhouse_past,
-        "sponsored_events": sponsored,
-        "other_events": other,
-        "today": today,
-    })
+    return render(
+        request,
+        "events/events.html",
+        {
+            "calendar_months": calendar_months,
+            "inhouse_upcoming": inhouse_upcoming,
+            "inhouse_past": inhouse_past,
+            "sponsored_events": sponsored,
+            "other_events": other,
+            "today": today,
+        },
+    )

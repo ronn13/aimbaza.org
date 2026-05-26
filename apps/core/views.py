@@ -1,9 +1,15 @@
+import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from apps.events.models import Event
+
 
 def home(request):
-    return render(request, "core/home.html")
+    today = datetime.date.today()
+    upcoming = list(Event.objects.filter(date__gte=today).order_by("date")[:3])
+    return render(request, "core/home.html", {"upcoming_events": upcoming})
 
 
 def contribute(request):
