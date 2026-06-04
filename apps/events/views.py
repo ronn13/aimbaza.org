@@ -75,6 +75,41 @@ def _load_international():
     return [e for e in entries if e.get("active", True)]
 
 
+def _annotate_international(events, today):
+    """Parse date/deadline strings and attach display-ready values to each event dict."""
+    for e in events:
+        for field in ("date", "deadline"):
+            raw = e.get(field)
+            if raw:
+                try:
+                    e[f"_{field}_parsed"] = datetime.date.fromisoformat(str(raw))
+                except ValueError:
+                    e[f"_{field}_parsed"] = None
+            else:
+                e[f"_{field}_parsed"] = None
+
+        d = e["_date_parsed"]
+        if d:
+            e["date_display"] = f"{d.day} {d.strftime('%b %Y')}"
+            e["date_is_past"] = d < today
+        else:
+            e["date_display"] = None
+            e["date_is_past"] = False
+
+        dl = e["_deadline_parsed"]
+        e["deadline_display"] = f"{dl.day} {dl.strftime('%b %Y')}" if dl else None
+
+    return events
+
+
+def _sort_by_date(events):
+    """Sort events by date ascending; events with no date go last."""
+    return sorted(
+        events,
+        key=lambda e: (e["_date_parsed"] is None, e["_date_parsed"] or datetime.date.min),
+    )
+
+
 def index(request):
     today = datetime.date.today()
 
@@ -83,17 +118,9 @@ def index(request):
 
     calendar_months = _build_calendar(today, inhouse_upcoming)
 
-    international = sorted(
-        _load_international(),
-        key=lambda e: (
-            not e.get("has_sponsorship", False),  # sponsored first
-            e.get("added_date", ""),
-        ),
-        reverse=False,
-    )
-    # Sort: sponsored first, then by added_date descending for non-sponsored
-    sponsored = [e for e in international if e.get("has_sponsorship")]
-    other = [e for e in international if not e.get("has_sponsorship")]
+    international = _annotate_international(_load_international(), today)
+    sponsored = _sort_by_date([e for e in international if e.get("has_sponsorship")])
+    other = _sort_by_date([e for e in international if not e.get("has_sponsorship")])
 
     return render(
         request,

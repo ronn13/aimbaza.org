@@ -241,6 +241,7 @@ class Command(BaseCommand):
                     "description": _truncate(summary, 240),
                     "url": link,
                     "location": "Africa (see link for details)",
+                    "date": None,
                     "deadline": None,
                     "has_sponsorship": has_sponsorship,
                     "sponsorship_details": sponsorship_details,

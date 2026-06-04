@@ -1,0 +1,81 @@
+name: Slack News Bot
+
+on:
+  schedule:
+    - cron: "0 8 * * 1"  # every Monday 08:00 UTC (11:00 EAT)
+  workflow_dispatch:
+    inputs:
+      digest_type:
+        description: "Which digest to send"
+        required: false
+        default: "weekly"
+        type: choice
+        options:
+          - weekly
+          - fortnightly
+          - both
+
+jobs:
+  weekly-digest:
+    name: Weekly digest
+    runs-on: ubuntu-latest
+    if: |
+      github.event_name == 'schedule' ||
+      (github.event_name == 'workflow_dispatch' &&
+       (github.event.inputs.digest_type == 'weekly' || github.event.inputs.digest_type == 'both'))
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests PyYAML
+
+      - name: Post weekly digest
+        run: python scripts/slack_news_bot.py weekly
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  fortnightly-digest:
+    name: Fortnightly digest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if fortnightly digest should run
+        id: should-run
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            TYPE="${{ github.event.inputs.digest_type }}"
+            [[ "$TYPE" == "fortnightly" || "$TYPE" == "both" ]] \
+              && echo "run=true" >> $GITHUB_OUTPUT \
+              || echo "run=false" >> $GITHUB_OUTPUT
+          else
+            # Run on even ISO week numbers (every other Monday)
+            WEEK=$(date +%V | sed 's/^0*//')
+            [ $((WEEK % 2)) -eq 0 ] \
+              && echo "run=true" >> $GITHUB_OUTPUT \
+              || echo "run=false" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.should-run.outputs.run == 'true'
+
+      - uses: actions/setup-python@v5
+        if: steps.should-run.outputs.run == 'true'
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        if: steps.should-run.outputs.run == 'true'
+        run: pip install requests PyYAML
+
+      - name: Post fortnightly digest
+        if: steps.should-run.outputs.run == 'true'
+        run: python scripts/slack_news_bot.py fortnightly
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}

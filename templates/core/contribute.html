@@ -92,6 +92,419 @@
 
   </div>
 
+  <!-- Step-by-step contribution guides -->
+  <h2 class="h4 fw-semibold mb-3">Contribution guides</h2>
+  <p class="text-muted mb-4">
+    Pick a task below. Each guide has everything you need — what to install, what to do,
+    and how to submit your work. No prior experience required for most tasks.
+  </p>
+
+  <div class="accordion mb-5" id="contributionGuides">
+
+    <!-- Track A: Evaluate a model -->
+    <div class="accordion-item border mb-2">
+      <h2 class="accordion-header" id="headingA">
+        <button class="accordion-button collapsed fw-semibold" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseA"
+                aria-expanded="false" aria-controls="collapseA">
+          <i class="fas fa-flask text-primary me-2"></i>
+          Evaluate a model &mdash; test how well our models handle real Kinyarwanda
+        </button>
+      </h2>
+      <div id="collapseA" class="accordion-collapse collapse" aria-labelledby="headingA"
+           data-bs-parent="#contributionGuides">
+        <div class="accordion-body">
+
+          <p><strong>What you'll do:</strong> Run one of the MbazaNLP models against real inputs,
+          score the outputs, and report what you find. Results go into the model card on HuggingFace
+          and help the community understand where each model performs well and where it falls short.</p>
+
+          <p><strong>Skills needed:</strong> Kinyarwanda fluency. A laptop. No machine learning
+          background required.</p>
+
+          <h6 class="fw-semibold mt-4 mb-2">Models available for evaluation</h6>
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr><th>Model</th><th>Task</th><th>HuggingFace ID</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Nllb_finetuned_general_en_kin</td><td>English &rarr; Kinyarwanda (general)</td><td><a href="https://huggingface.co/mbazaNLP/Nllb_finetuned_general_en_kin" target="_blank" rel="noopener">mbazaNLP/Nllb_finetuned_general_en_kin</a></td></tr>
+              <tr><td>Nllb_finetuned_education_en_kin</td><td>Education-domain translation</td><td><a href="https://huggingface.co/mbazaNLP/Nllb_finetuned_education_en_kin" target="_blank" rel="noopener">mbazaNLP/Nllb_finetuned_education_en_kin</a></td></tr>
+              <tr><td>Nllb_finetuned_tourism_en_kin</td><td>Tourism-domain translation</td><td><a href="https://huggingface.co/mbazaNLP/Nllb_finetuned_tourism_en_kin" target="_blank" rel="noopener">mbazaNLP/Nllb_finetuned_tourism_en_kin</a></td></tr>
+              <tr><td>Whisper-Small-Kinyarwanda</td><td>Speech recognition (ASR)</td><td><a href="https://huggingface.co/mbazaNLP/Whisper-Small-Kinyarwanda" target="_blank" rel="noopener">mbazaNLP/Whisper-Small-Kinyarwanda</a></td></tr>
+              <tr><td>kinyarwanda-tts-model</td><td>Text-to-speech</td><td><a href="https://huggingface.co/mbazaNLP/kinyarwanda-tts-model" target="_blank" rel="noopener">mbazaNLP/kinyarwanda-tts-model</a></td></tr>
+            </tbody>
+          </table>
+
+          <h6 class="fw-semibold mt-4 mb-2">Step 1 &mdash; install dependencies</h6>
+          <pre class="bg-light border rounded p-3"><code>pip install transformers torch soundfile
+# For ASR and TTS also install:
+pip install datasets torchaudio</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 2 &mdash; load and run a model</h6>
+          <p>Translation example:</p>
+          <pre class="bg-light border rounded p-3"><code>from transformers import pipeline
+
+translator = pipeline(
+    "translation",
+    model="mbazaNLP/Nllb_finetuned_general_en_kin"
+)
+result = translator(
+    "The student reads the book carefully.",
+    src_lang="eng_Latn",
+    tgt_lang="kin_Latn"
+)
+print(result[0]["translation_text"])</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 3 &mdash; score each output</h6>
+          <p>For each of your 20 test inputs, rate the output on three dimensions using a 1&ndash;5 scale:</p>
+          <ul>
+            <li><strong>Fluency</strong> &mdash; does the output read like natural Kinyarwanda?</li>
+            <li><strong>Adequacy</strong> &mdash; does it convey the same meaning as the source?</li>
+            <li><strong>Domain fit</strong> &mdash; does the vocabulary match the expected domain (education, tourism, etc.)?</li>
+          </ul>
+          <p>Flag any clear errors: mistranslations, hallucinated content, or unintelligible audio output.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 4 &mdash; submit your results</h6>
+          <p>Copy your scores into the
+          <a href="https://docs.google.com/spreadsheets/d/1placeholder" target="_blank" rel="noopener">community evaluation spreadsheet</a>
+          (link shared in <strong>#models</strong> on Slack). Include: the model name, your input sentences,
+          the outputs, your scores, and any error notes. A maintainer will aggregate the results and
+          update the model card on HuggingFace.</p>
+
+          <p class="text-muted small mt-3">No laptop? TTS outputs can be rated by ear using the offline
+          evaluation pack — ask in <strong>#help</strong> on Slack.</p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Track B: Contribute parallel sentence pairs -->
+    <div class="accordion-item border mb-2">
+      <h2 class="accordion-header" id="headingB">
+        <button class="accordion-button collapsed fw-semibold" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseB"
+                aria-expanded="false" aria-controls="collapseB">
+          <i class="fas fa-language text-success me-2"></i>
+          Add parallel sentence pairs &mdash; grow the training data for translation models
+        </button>
+      </h2>
+      <div id="collapseB" class="accordion-collapse collapse" aria-labelledby="headingB"
+           data-bs-parent="#contributionGuides">
+        <div class="accordion-body">
+
+          <p><strong>What you'll do:</strong> Translate English sentences into Kinyarwanda (or review
+          existing translations for accuracy) and submit them as new rows in the
+          <a href="https://huggingface.co/datasets/mbazaNLP/NMT_Education_parallel_data_en_kin"
+             target="_blank" rel="noopener">NMT Education parallel dataset</a>.
+          The dataset currently has around 10,000 sentence pairs and is the primary training data
+          for the education-domain translation model.</p>
+
+          <p><strong>Skills needed:</strong> Bilingual fluency in Kinyarwanda and English or French.
+          No coding required.</p>
+
+          <h6 class="fw-semibold mt-4 mb-2">What you can contribute</h6>
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr><th>Type</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>New pairs</td><td>Translate English education sentences into Kinyarwanda</td></tr>
+              <tr><td>Review</td><td>Check existing pairs for accuracy and flag errors</td></tr>
+              <tr><td>Domain expansion</td><td>Contribute pairs from a new domain: health, agriculture, or legal</td></tr>
+            </tbody>
+          </table>
+
+          <h6 class="fw-semibold mt-4 mb-2">Step 1 &mdash; find source sentences</h6>
+          <p>Use any of the following as source material:</p>
+          <ul>
+            <li>The curated list of English education sentences shared in <strong>#data</strong> on Slack</li>
+            <li>Primary school textbooks, government education documents, or curriculum materials
+            in PDF or Word format (licensed for reuse)</li>
+            <li>Open educational resources published under CC-BY</li>
+          </ul>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 2 &mdash; format your pairs</h6>
+          <p>Each contribution is a simple two-line pair. Use plain text — no machine translation:</p>
+          <pre class="bg-light border rounded p-3"><code>en: The teacher writes on the blackboard.
+kin: Umwarimu andika ku mbaho.
+
+en: Students should study every day.
+kin: Abanyeshuri bagomba kwiga buri munsi.</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 3 &mdash; quality check before submitting</h6>
+          <ul>
+            <li>Both sides must be complete sentences, not fragments.</li>
+            <li>The Kinyarwanda translation must be grammatically correct — have at least one other
+            fluent speaker review it before submitting.</li>
+            <li>Do not use machine-generated translations. The dataset is human reference data.</li>
+          </ul>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 4 &mdash; submit</h6>
+          <p>Add your pairs to the
+          <a href="https://docs.google.com/spreadsheets/d/1placeholder" target="_blank" rel="noopener">community contribution sheet</a>
+          (link in <strong>#data</strong> on Slack). Pairs are batched by a maintainer into a pull
+          request against the dataset at the end of each month. You will be credited in the dataset
+          changelog.</p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Track C1: Review or write a model card -->
+    <div class="accordion-item border mb-2">
+      <h2 class="accordion-header" id="headingC1">
+        <button class="accordion-button collapsed fw-semibold" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseC1"
+                aria-expanded="false" aria-controls="collapseC1">
+          <i class="fas fa-id-card text-warning me-2"></i>
+          Review or write a model card &mdash; make models discoverable and trustworthy
+        </button>
+      </h2>
+      <div id="collapseC1" class="accordion-collapse collapse" aria-labelledby="headingC1"
+           data-bs-parent="#contributionGuides">
+        <div class="accordion-body">
+
+          <p><strong>What you'll do:</strong> Write or improve the documentation card for a MbazaNLP
+          model on HuggingFace. A complete model card tells users what the model does, what it should
+          not be used for, how it was trained, and how well it performs. These details matter for
+          responsible AI use and make the model citable in academic work.</p>
+
+          <p><strong>Skills needed:</strong> Clear technical writing. Familiarity with the model's
+          task is helpful but not required &mdash; you can write documentation from the training
+          repository and paper alone.</p>
+
+          <h6 class="fw-semibold mt-4 mb-2">What a complete model card includes</h6>
+          <table class="table table-sm table-bordered">
+            <thead class="table-light">
+              <tr><th>Section</th><th>What to write</th><th>Common gap?</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>YAML frontmatter</td><td>Language tags (e.g. <code>language: rw</code>), licence, task tags</td><td>Yes &mdash; missing tags make the model invisible in HuggingFace search</td></tr>
+              <tr><td>Model description</td><td>What it is, architecture, base model, training data summary</td><td>Sometimes</td></tr>
+              <tr><td>Intended Use</td><td>Primary use case + what it should NOT be used for</td><td>Yes &mdash; was missing from 10 of 11 MbazaNLP models before May 2026</td></tr>
+              <tr><td>Limitations &amp; Bias</td><td>Known failure modes, language variety coverage, demographic gaps</td><td>Yes</td></tr>
+              <tr><td>Evaluation results</td><td>At least one metric (BLEU, WER, MOS) on a named test set</td><td>Yes</td></tr>
+              <tr><td>How to use</td><td>Working code example using the current Transformers API</td><td>Sometimes</td></tr>
+              <tr><td>Citation</td><td>BibTeX block so researchers can cite the model</td><td>Yes &mdash; was missing from all 13 models</td></tr>
+            </tbody>
+          </table>
+
+          <h6 class="fw-semibold mt-4 mb-2">Step 1 &mdash; pick a model</h6>
+          <p>Browse the
+          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">mbazaNLP organisation on HuggingFace</a>
+          and find a model whose card is incomplete. Look for blank sections, missing YAML frontmatter,
+          or no code example. The <strong>#models</strong> channel on Slack has a list of current gaps.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 2 &mdash; use the community template</h6>
+          <p>Fork the
+          <a href="https://huggingface.co/mbazaNLP/model-card-template" target="_blank" rel="noopener">mbazaNLP/model-card-template</a>
+          repository on HuggingFace as your starting point. Fill in each section for the model you
+          have chosen. Check the
+          <a href="https://github.com/MBAZA-NLP/engineering-standards/blob/main/docs/model-card-standards.md"
+             target="_blank" rel="noopener">community model card standards</a>
+          for the required fields and format.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 3 &mdash; test the code example</h6>
+          <p>Before submitting, run the code example in the card and confirm it works with the current
+          version of the Transformers library. Outdated examples are one of the most common issues
+          found in MbazaNLP model cards.</p>
+          <pre class="bg-light border rounded p-3"><code>pip install transformers --upgrade
+# Then paste and run the code example from your draft card</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 4 &mdash; open a pull request</h6>
+          <p>On HuggingFace, navigate to the model repository and open a community PR with your
+          updated <code>README.md</code>. Title it: <code>docs: improve model card — add [sections you added]</code>.
+          Post the PR link in <strong>#models</strong> on Slack so a maintainer can review it.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Checklist before submitting</h6>
+          <pre class="bg-light border rounded p-3"><code>[ ] YAML frontmatter: language, licence, task tags present
+[ ] Model description: architecture and base model named
+[ ] Intended Use: primary use + out-of-scope uses (2 paragraphs)
+[ ] Limitations and Bias: at least one paragraph
+[ ] Training data: dataset name, size, and source
+[ ] Evaluation results: at least one metric on a named test set
+[ ] How to use: code example tested and working on current Transformers
+[ ] Citation: BibTeX block present</code></pre>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Track C2: Contribute to the website -->
+    <div class="accordion-item border mb-2">
+      <h2 class="accordion-header" id="headingC2">
+        <button class="accordion-button collapsed fw-semibold" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseC2"
+                aria-expanded="false" aria-controls="collapseC2">
+          <i class="fas fa-globe text-info me-2"></i>
+          Contribute to the website &mdash; add content or fix issues on aimbaza.org
+        </button>
+      </h2>
+      <div id="collapseC2" class="accordion-collapse collapse" aria-labelledby="headingC2"
+           data-bs-parent="#contributionGuides">
+        <div class="accordion-body">
+
+          <p><strong>What you'll do:</strong> Make changes to the aimbaza.org Django site — add an
+          event, add an opportunity, fix a broken link, or write a blog post. The site is
+          open-source and accepts pull requests from any contributor.</p>
+
+          <p><strong>Skills needed:</strong> Python basics and git familiarity. For content-only
+          changes (events, opportunities), you only need to edit a YAML or JSON file &mdash; no
+          Django knowledge required.</p>
+
+          <h6 class="fw-semibold mt-4 mb-2">Good first tasks</h6>
+          <ul>
+            <li>Add an upcoming community event to the events calendar</li>
+            <li>Add a grant, fellowship, or computing opportunity to the Opportunities page</li>
+            <li>Fix a broken link or typo anywhere on the site</li>
+            <li>Write a short blog post about your NLP work or research</li>
+          </ul>
+
+          <h6 class="fw-semibold mt-4 mb-2">Step 1 &mdash; set up the site locally</h6>
+          <pre class="bg-light border rounded p-3"><code>git clone https://github.com/MBAZA-NLP/aimbaza.org.git
+cd aimbaza.org
+
+python -m venv .venv
+# Mac / Linux:
+source .venv/bin/activate
+# Windows:
+.venv\Scripts\activate
+
+pip install -r requirements/development.txt
+cp .env.example .env
+python manage.py migrate
+python manage.py loaddata apps/events/fixtures/initial_events.json \
+                          apps/blog/fixtures/initial_posts.json
+python manage.py runserver</code></pre>
+          <p>The site will be available at <code>http://127.0.0.1:8000</code>.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 2 &mdash; make your change</h6>
+          <p><strong>Adding an event:</strong> Open <code>apps/events/fixtures/initial_events.json</code>
+          and add a new entry following the format of the existing ones. Run
+          <code>python manage.py loaddata apps/events/fixtures/initial_events.json</code>
+          to reload and check it appears on the Events page.</p>
+
+          <p><strong>Adding an opportunity:</strong> Open
+          <code>apps/opportunities/fixtures/initial_opportunities.json</code>
+          and add your entry. Each opportunity needs a title, description, category
+          (computing / grant / fellowship), deadline, and link.</p>
+
+          <p><strong>Writing a blog post:</strong> Add a new entry to
+          <code>apps/blog/fixtures/initial_posts.json</code> with a unique <code>pk</code>,
+          a slug, title, excerpt, body, author, and published date. Reload with
+          <code>python manage.py loaddata apps/blog/fixtures/initial_posts.json</code>.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 3 &mdash; run the checks</h6>
+          <pre class="bg-light border rounded p-3"><code>black . --check
+flake8 .
+python manage.py test</code></pre>
+          <p>All three must pass before you open a pull request.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 4 &mdash; open a pull request</h6>
+          <pre class="bg-light border rounded p-3"><code>git checkout -b feat/add-your-change-description
+git add .
+git commit -m "feat: add [what you added]"
+git push origin feat/add-your-change-description</code></pre>
+          <p>Open a PR against the <code>develop</code> branch (not <code>main</code>).
+          A maintainer will review within 5 working days. See
+          <a href="https://github.com/MBAZA-NLP/aimbaza.org/blob/main/CONTRIBUTING.md"
+             target="_blank" rel="noopener">CONTRIBUTING.md</a> for the full workflow.</p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Track C3: First PR walkthrough -->
+    <div class="accordion-item border mb-2">
+      <h2 class="accordion-header" id="headingC3">
+        <button class="accordion-button collapsed fw-semibold" type="button"
+                data-bs-toggle="collapse" data-bs-target="#collapseC3"
+                aria-expanded="false" aria-controls="collapseC3">
+          <i class="fas fa-star text-secondary me-2"></i>
+          Make your first pull request &mdash; complete beginner walkthrough
+        </button>
+      </h2>
+      <div id="collapseC3" class="accordion-collapse collapse" aria-labelledby="headingC3"
+           data-bs-parent="#contributionGuides">
+        <div class="accordion-body">
+
+          <p><strong>What you'll do:</strong> Set up the tools every contributor needs and make a
+          small, real contribution to a MbazaNLP repository. By the end you will have a GitHub
+          account, a HuggingFace account, and at least one merged pull request.</p>
+
+          <p><strong>Skills needed:</strong> None. Bring a laptop and 90 minutes.</p>
+
+          <h6 class="fw-semibold mt-4 mb-2">Step 1 &mdash; create accounts</h6>
+          <ol>
+            <li class="mb-2">
+              <strong>GitHub:</strong> go to <a href="https://github.com/join" target="_blank" rel="noopener">github.com/join</a>
+              and create a free account. GitHub is where MbazaNLP source code and documentation live.
+            </li>
+            <li class="mb-2">
+              <strong>HuggingFace:</strong> go to <a href="https://huggingface.co/join" target="_blank" rel="noopener">huggingface.co/join</a>
+              and create a free account. HuggingFace is where MbazaNLP publishes its models and datasets.
+            </li>
+            <li class="mb-2">
+              <strong>Slack:</strong> join the community workspace at
+              <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+                 target="_blank" rel="noopener">aimbaza.slack.com</a>.
+              Introduce yourself in <strong>#introductions</strong> and join the channels relevant
+              to what you want to work on.
+            </li>
+          </ol>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 2 &mdash; install Git</h6>
+          <p>Git is the version control tool used by every contributor.</p>
+          <ul>
+            <li><strong>Windows:</strong> download from <a href="https://git-scm.com/download/win" target="_blank" rel="noopener">git-scm.com</a> and run the installer.</li>
+            <li><strong>Mac:</strong> run <code>xcode-select --install</code> in Terminal.</li>
+            <li><strong>Linux:</strong> run <code>sudo apt install git</code> (Ubuntu/Debian) or <code>sudo dnf install git</code> (Fedora).</li>
+          </ul>
+          <p>Confirm it is installed:</p>
+          <pre class="bg-light border rounded p-3"><code>git --version</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 3 &mdash; configure Git with your name</h6>
+          <pre class="bg-light border rounded p-3"><code>git config --global user.name "Your Name"
+git config --global user.email "your@email.com"</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 4 &mdash; fork and clone a repository</h6>
+          <p>Go to a MbazaNLP repository on GitHub (for example,
+          <a href="https://github.com/MBAZA-NLP/aimbaza.org" target="_blank" rel="noopener">MBAZA-NLP/aimbaza.org</a>).
+          Click the <strong>Fork</strong> button in the top right corner — this creates your own
+          copy of the repository under your account. Then clone it to your machine:</p>
+          <pre class="bg-light border rounded p-3"><code>git clone https://github.com/YOUR-USERNAME/aimbaza.org.git
+cd aimbaza.org</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 5 &mdash; create a branch and make a change</h6>
+          <pre class="bg-light border rounded p-3"><code># Always create a branch — never commit directly to main
+git checkout -b docs/fix-my-first-typo</code></pre>
+          <p>Open any file and make a small, real change: fix a spelling error, improve a sentence
+          in the README, or add a missing full stop. Save the file.</p>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 6 &mdash; commit and push</h6>
+          <pre class="bg-light border rounded p-3"><code>git add .
+git commit -m "docs: fix typo in README"
+git push origin docs/fix-my-first-typo</code></pre>
+
+          <h6 class="fw-semibold mt-3 mb-2">Step 7 &mdash; open a pull request</h6>
+          <p>Go to your forked repository on GitHub. You will see a banner saying your branch is
+          ahead of the original. Click <strong>Compare &amp; pull request</strong>. Write a short
+          description of what you changed and why, then click <strong>Create pull request</strong>.</p>
+          <p>A maintainer will review your PR and either merge it or leave feedback. Post the PR
+          link in <strong>#github</strong> on Slack if you would like someone to take a look sooner.</p>
+
+          <p class="alert alert-success mt-3 mb-0">
+            <i class="fas fa-check-circle me-1"></i>
+            That is it. You are now a contributor to an open-source African language AI project.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- Workflow -->
   <h2 class="h4 fw-semibold mb-3">Pull Request Workflow</h2>
   <ol class="mb-4">

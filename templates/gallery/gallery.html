@@ -6,18 +6,45 @@
 
 {% block extra_css %}
 <style>
-  .gallery-img {
+  .gallery-wrap {
+    position: relative;
     width: 100%;
     aspect-ratio: 4 / 3;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .gallery-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 4px;
-    transition: opacity 0.2s;
+    transition: opacity 0.3s;
+    opacity: 0;
   }
+  .gallery-img.loaded { opacity: 1; }
   .gallery-img:hover { opacity: 0.88; }
 
-  .gallery-card {
-    cursor: pointer;
+  /* skeleton shimmer */
+  @keyframes shimmer {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
   }
+  .gallery-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, #e9ecef 25%, #dee2e6 50%, #e9ecef 75%);
+    background-size: 800px 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 4px;
+    transition: opacity 0.3s;
+  }
+  .gallery-wrap.loaded::before { opacity: 0; pointer-events: none; }
+
+  .gallery-card { cursor: pointer; }
 
   /* Lightbox */
   #lightbox {
@@ -31,11 +58,18 @@
     flex-direction: column;
   }
   #lightbox.active { display: flex; }
+  #lightbox-img-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   #lightbox img {
     max-height: 85vh;
     max-width: 92vw;
     object-fit: contain;
     border-radius: 4px;
+    transition: opacity 0.2s;
   }
   #lightbox-caption {
     color: #ccc;
@@ -88,12 +122,13 @@
     {% for photo in photos %}
     <div class="col">
       <div class="gallery-card" data-index="{{ forloop.counter0 }}">
-        <img
-          src="{% static photo.url %}"
-          alt="{{ photo.alt }}"
-          class="gallery-img"
-          loading="lazy"
-        >
+        <div class="gallery-wrap">
+          <img
+            data-src="{% static photo.thumb_url %}"
+            alt="{{ photo.alt }}"
+            class="gallery-img"
+          >
+        </div>
       </div>
     </div>
     {% endfor %}
@@ -110,7 +145,9 @@
 <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button id="lightbox-close" aria-label="Close">&times;</button>
   <button id="lightbox-prev" aria-label="Previous">&#8249;</button>
-  <img id="lightbox-img" src="" alt="">
+  <div id="lightbox-img-wrap">
+    <img id="lightbox-img" src="" alt="">
+  </div>
   <p id="lightbox-caption"></p>
   <button id="lightbox-next" aria-label="Next">&#8250;</button>
 </div>
@@ -121,10 +158,27 @@
 (function () {
   const photos = [
     {% for photo in photos %}
-    { src: "{% static photo.url %}", alt: "{{ photo.alt }}" }{% if not forloop.last %},{% endif %}
+    { src: "{% static photo.url %}", thumb: "{% static photo.thumb_url %}", alt: "{{ photo.alt }}" }{% if not forloop.last %},{% endif %}
     {% endfor %}
   ];
 
+  // IntersectionObserver lazy-loads thumbnails as they enter the viewport
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const img = entry.target;
+      img.src = img.dataset.src;
+      img.onload = () => {
+        img.classList.add('loaded');
+        img.closest('.gallery-wrap').classList.add('loaded');
+      };
+      observer.unobserve(img);
+    });
+  }, { rootMargin: '200px' });
+
+  document.querySelectorAll('.gallery-img[data-src]').forEach(img => observer.observe(img));
+
+  // Lightbox
   let current = 0;
   const lb      = document.getElementById('lightbox');
   const lbImg   = document.getElementById('lightbox-img');
@@ -135,8 +189,10 @@
 
   function show(idx) {
     current = (idx + photos.length) % photos.length;
+    lbImg.style.opacity = '0';
     lbImg.src = photos[current].src;
     lbImg.alt = photos[current].alt;
+    lbImg.onload = () => { lbImg.style.opacity = '1'; };
     lbCap.textContent = `${current + 1} / ${photos.length}  —  ${photos[current].alt}`;
     lb.classList.add('active');
   }

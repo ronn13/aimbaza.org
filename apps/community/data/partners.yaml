@@ -6,7 +6,8 @@
 #   type          funding | data | research | community
 #   description   2-3 sentences on the relationship and collaboration
 #   url           partner website
-#   logo_text     short text shown in place of a logo image
+#   logo          filename in static/images/partners/ (optional)
+#   logo_text     short text shown when no logo image is available
 #   active        bool — false hides from page
 
 - id: giz
@@ -19,6 +20,7 @@
     engineering standards, model documentation, and community events through the
     DPG (Digital Public Good) maintainer programme.
   url: https://www.giz.de/en/worldwide/33041.html
+  logo: giz.svg
   logo_text: GIZ
   active: true
 
@@ -31,6 +33,7 @@
     and speech models draw on data collected through Digital Umuganda campaigns, and the
     two communities share contributors and coordinate data collection sprints.
   url: https://digitalumuganda.com
+  logo: digital-umuganda.svg
   logo_text: Digital Umuganda
   active: true
 
@@ -67,5 +70,58 @@
     drawn on CMU Africa's computing resources and research expertise for model development
     and evaluation on Kinyarwanda benchmarks.
   url: https://www.africa.engineering.cmu.edu
+  logo: cmu-africa.svg
   logo_text: CMU Africa
+  active: true
+
+- id: university-of-rwanda
+  name: University of Rwanda
+  type: research
+  description: >
+    The University of Rwanda is the country's largest public university, with faculties
+    spanning science, engineering, and social sciences. UR collaborates with MbazaNLP on
+    Kinyarwanda NLP research, providing academic expertise and student contributors to
+    dataset creation and model evaluation work.
+  url: https://www.ur.ac.rw/
+  logo: ur.png
+  logo_text: University of Rwanda
+  active: true
+
+- id: shecancode
+  name: SheCanCode
+  type: community
+  description: >
+    SheCanCode is Rwanda's leading coding bootcamp for women, training hundreds of female
+    software developers across cohorts in Kigali. MbazaNLP partners with SheCanCode to
+    engage women technologists in African language AI, broadening participation in NLP
+    research and open-source contributions.
+  url: https://www.shecancodeschool.org/
+  logo: shecancode.png
+  logo_text: SheCanCode
+  active: true
+
+- id: klab
+  name: kLab Rwanda
+  type: community
+  description: >
+    kLab is Rwanda's premier technology innovation hub, supporting startups and tech
+    communities in Kigali. Through kLab's co-working space and events programme,
+    MbazaNLP hosts community sprints, hackathons, and workshops on Kinyarwanda NLP
+    tools and applications.
+  url: https://klab.rw/
+  logo: klab.png
+  logo_text: kLab Rwanda
+  active: true
+
+- id: risa
+  name: Rwanda Information Society Authority
+  type: community
+  description: >
+    RISA is the Rwandan government agency responsible for ICT and digital transformation.
+    RISA supports MbazaNLP's work on Kinyarwanda language technology as part of Rwanda's
+    broader digital economy and e-government agenda, and facilitates links between the
+    community and government data partners.
+  url: https://www.risa.gov.rw/
+  logo: risa.png
+  logo_text: RISA
   active: true
