@@ -3,6 +3,47 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block description %}{{ post.excerpt }}{% endblock %}
 
+{% block extra_css %}
+<style>
+  .post-body h2 { font-size: 1.35rem; font-weight: 700; margin-top: 2rem; margin-bottom: .6rem; }
+  .post-body p  { margin-bottom: 1rem; line-height: 1.75; }
+  .post-body ul, .post-body ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+  .post-body li { margin-bottom: .35rem; line-height: 1.65; }
+  .post-body pre {
+    background: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: .4rem;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    font-size: .82rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+  .post-body code {
+    background: #f0f0f0;
+    border-radius: .2rem;
+    padding: .1em .35em;
+    font-size: .88em;
+  }
+  .post-body pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+  .post-body table {
+    width: auto;
+    border-collapse: collapse;
+    margin-bottom: 1.25rem;
+    font-size: .9rem;
+  }
+  .post-body th, .post-body td {
+    border: 1px solid #dee2e6;
+    padding: .4rem .75rem;
+  }
+  .post-body th { background: #f6f8fa; font-weight: 600; }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
   <div class="row justify-content-center">
@@ -26,7 +67,7 @@
       <hr class="mb-4">
 
       <div class="post-body">
-        {{ post.body|linebreaks }}
+        {{ post.body|safe }}
       </div>
 
       <hr class="mt-5 mb-4">
