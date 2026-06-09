@@ -20,7 +20,7 @@ import feedparser
 import yaml
 from django.core.management.base import BaseCommand
 
-DATA_FILE = pathlib.Path(__file__).parents[4] / "data" / "opportunities.yaml"
+DATA_FILE = pathlib.Path(__file__).parents[2] / "data" / "opportunities.yaml"
 
 OPPORTUNITY_KEYWORDS = [
     "grant",

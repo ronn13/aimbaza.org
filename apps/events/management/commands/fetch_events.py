@@ -24,7 +24,7 @@ import feedparser
 import yaml
 from django.core.management.base import BaseCommand
 
-DATA_FILE = pathlib.Path(__file__).parents[4] / "data" / "international_events.yaml"
+DATA_FILE = pathlib.Path(__file__).parents[2] / "data" / "international_events.yaml"
 
 # At least one Africa keyword AND one NLP/AI keyword must appear.
 AFRICA_KEYWORDS = [
