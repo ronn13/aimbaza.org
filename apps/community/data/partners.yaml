@@ -46,6 +46,7 @@
     for low-resource African languages, including model documentation standards, bias
     disclosure, and the open licensing of all community outputs under Apache 2.0 and CC-BY.
   url: https://fair-forward.github.io
+  logo: fairforward.jpg
   logo_text: FairForward
   active: true
 
@@ -58,6 +59,7 @@
     and grant applications. Community members participate in Masakhane research calls and
     contribute to shared datasets and models for East African languages.
   url: https://www.masakhane.io
+  logo: masakhane.png
   logo_text: Masakhane
   active: true
 
