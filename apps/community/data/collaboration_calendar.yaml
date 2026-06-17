@@ -11,18 +11,6 @@
 #   url         link for more info (optional)
 #   active      bool
 
-- id: community-sprint-june-2026
-  title: MbazaNLP Community Sprint
-  date: "2026-06-14"
-  end_date: "2026-06-15"
-  partner_ids: [digital-umuganda, cmu-africa]
-  type: sprint
-  description: >
-    Two-day open sprint in Kigali covering model evaluation, dataset contributions,
-    and onboarding new contributors. Co-organised with Digital Umuganda and CMU Africa.
-  url: https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg
-  active: true
-
 - id: lacuna-fund-cycle-2026
   title: Lacuna Fund Grant Cycle
   date: "2026-07-01"
@@ -47,16 +35,4 @@
     at the Deep Learning Indaba. Travel scholarship applications are open to
     community members through the Masakhane network.
   url: https://deeplearningindaba.com
-  active: true
-
-- id: giz-m2-review
-  title: GIZ M2 Milestone Review
-  date: "2026-06-30"
-  end_date: null
-  partner_ids: [giz]
-  type: workshop
-  description: >
-    Final delivery review with GIZ Digital Transformation Center — handover of
-    all deliverables, deployment documentation, and technical handover workshop.
-  url: null
   active: true
