@@ -20,7 +20,7 @@
     engineering standards, model documentation, and community events through the
     DPG (Digital Public Good) maintainer programme.
   url: https://www.giz.de/en/worldwide/33041.html
-  logo: giz.svg
+  logo: giz.jpg
   logo_text: GIZ
   active: true
 
@@ -33,7 +33,7 @@
     and speech models draw on data collected through Digital Umuganda campaigns, and the
     two communities share contributors and coordinate data collection sprints.
   url: https://digitalumuganda.com
-  logo: digital-umuganda.svg
+  logo: digital-umuganda.jpg
   logo_text: Digital Umuganda
   active: true
 
@@ -72,7 +72,7 @@
     drawn on CMU Africa's computing resources and research expertise for model development
     and evaluation on Kinyarwanda benchmarks.
   url: https://www.africa.engineering.cmu.edu
-  logo: cmu-africa.svg
+  logo: cmu-africa.png
   logo_text: CMU Africa
   active: true
 
