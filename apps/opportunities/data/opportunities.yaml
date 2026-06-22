@@ -1,119 +1,219 @@
-# Opportunities data — source of truth for the /opportunities/ page.
-#
-# pinned: true  — manually curated, never modified by fetch_opportunities
-# pinned: false — may be updated or marked stale by fetch_opportunities
-#
-# Categories: computing | grants | fellowships
-#
-# Fields:
-#   id          unique slug (used for deduplication)
-#   title       display name
-#   category    computing | grants | fellowships
-#   description one or two sentences shown on the card
-#   url         primary link (call-to-action button)
-#   button_text text for the CTA button (default: "Learn more →")
-#   pinned      bool — if true, fetch_opportunities will not touch this entry
-#   rss_url     optional — the RSS feed URL for this source (used by fetch_opportunities)
-#   added_date  ISO date this entry was added (YYYY-MM-DD)
-#   active      bool — set to false to hide from the page without deleting
-
-
 - id: google-tpu
   title: Google TPU Research Cloud
   category: computing
-  description: >
-    Google offers free TPU access to researchers working on open-source NLP projects.
-    Academic and community applicants are eligible.
+  description: 'Google offers free TPU access to researchers working on open-source
+    NLP projects. Academic and community applicants are eligible.
+
+    '
   url: https://sites.research.google/trc/about/
   button_text: Learn more →
   pinned: true
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
   active: true
-
 - id: aws-research-credits
   title: AWS Research Credits
   category: computing
-  description: >
-    Amazon Web Services offers research credit grants for academic researchers and
-    non-profit open-source projects. Eligible for GPU compute for model training and inference.
+  description: 'Amazon Web Services offers research credit grants for academic researchers
+    and non-profit open-source projects. Eligible for GPU compute for model training
+    and inference.
+
+    '
   url: https://aws.amazon.com/government-education/research-and-technical-computing/research-credits/
   button_text: Apply for credits →
   pinned: true
-  added_date: "2026-05-25"
+  added_date: '2026-05-25'
   active: true
-
 - id: lacuna-fund
   title: Lacuna Fund
   category: grants
-  description: >
-    Funds the creation of labelled training data for machine learning in the Global South,
-    with a focus on underrepresented languages including African languages.
+  description: 'Funds the creation of labelled training data for machine learning
+    in the Global South, with a focus on underrepresented languages including African
+    languages.
+
+    '
   url: https://lacunafund.org
   button_text: Visit Lacuna Fund →
   pinned: true
   rss_url: https://lacunafund.org/feed/
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
   active: true
-
 - id: mozilla-technology-fund
   title: Mozilla Technology Fund
   category: grants
-  description: >
-    Supports open-source projects and research that advance trustworthy AI and internet health,
-    including low-resource language technology.
+  description: 'Supports open-source projects and research that advance trustworthy
+    AI and internet health, including low-resource language technology.
+
+    '
   url: https://foundation.mozilla.org/en/what-we-fund/awards/mozilla-technology-fund/
   button_text: Learn more →
   pinned: true
   rss_url: https://foundation.mozilla.org/en/feed/
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
   active: true
-
 - id: ai4d-africa
   title: AI4D Africa Grants
   category: grants
-  description: >
-    The Artificial Intelligence for Development Africa initiative funds NLP and AI research
-    in African contexts, with grants for researchers and community organisations.
+  description: 'The Artificial Intelligence for Development Africa initiative funds
+    NLP and AI research in African contexts, with grants for researchers and community
+    organisations.
+
+    '
   url: https://ai4d.ai
   button_text: Visit AI4D →
   pinned: true
   rss_url: https://ai4d.ai/feed/
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
   active: true
-
 - id: giz-digital-transformation
   title: GIZ Digital Transformation
   category: grants
-  description: >
-    GIZ Rwanda's Digital Transformation Center supports digital public goods and
-    open-source community infrastructure in Rwanda.
+  description: 'GIZ Rwanda''s Digital Transformation Center supports digital public
+    goods and open-source community infrastructure in Rwanda.
+
+    '
   url: https://www.giz.de/en/worldwide/33041.html
   button_text: Learn more →
   pinned: true
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
   active: true
-
 - id: masakhane-grants
   title: Masakhane Research Grants
   category: fellowships
-  description: >
-    Masakhane, the pan-African NLP research community, periodically offers grants and
-    collaboration opportunities for African language NLP research.
+  description: 'Masakhane, the pan-African NLP research community, periodically offers
+    grants and collaboration opportunities for African language NLP research.
+
+    '
   url: https://www.masakhane.io
   button_text: Visit Masakhane →
   pinned: true
   rss_url: https://www.masakhane.io/feed.xml
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
   active: true
-
 - id: google-for-startups
   title: Google for Startups Africa
   category: fellowships
-  description: >
-    Google for Startups Africa offers equity-free funding, cloud credits, and mentorship
-    to startups building AI tools in Africa.
+  description: 'Google for Startups Africa offers equity-free funding, cloud credits,
+    and mentorship to startups building AI tools in Africa.
+
+    '
   url: https://startup.google.com/programs/black-founders-fund/africa/
   button_text: Learn more →
   pinned: true
-  added_date: "2026-05-22"
+  added_date: '2026-05-22'
+  active: true
+- id: opportunity-desk-bolder-futures-fellowship-ai-for-social-good-2026
+  title: 'Opportunity Desk: Bolder Futures Fellowship: AI for Social Good 2026'
+  category: fellowships
+  description: 'Deadline: June 30, 2026 Applications are open for the Bolder Futures
+    Fellowship: AI for Social Good 2026. The fellowship aims to benefit individuals
+    and organizations alike, by improving career...'
+  url: https://opportunitydesk.org/2026/06/22/bolder-futures-fellowship-ai-for-social-good-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-kenneth-c-frazier-award-for-maternal-health-equity-2026-up-t
+  title: 'Opportunity Desk: Kenneth C. Frazier Award for Maternal Health Equity 2026
+    (up to $250,000)'
+  category: fellowships
+  description: 'Deadline: June 30, 2026 Applications are open for the Kenneth C. Frazier
+    Award for Maternal Health Equity 2026. In 2021, MSD for Mothers, MSD’s $650 million
+    global initiative to help create a world...'
+  url: https://opportunitydesk.org/2026/06/22/kenneth-c-frazier-award-for-maternal-health-equity-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-apply-to-y-combinator-fall-2026-up-to-500000
+  title: 'Opportunity Desk: Apply to Y Combinator – Fall 2026 (up to $500,000)'
+  category: fellowships
+  description: 'Deadline: July 27, 2026 Apply to Y Combinator &#8211; Fall 2026. The
+    overall goal of YC is to help startups really take off. They arrive at YC at all
+    different stages. Some haven&#8217;t even...'
+  url: https://opportunitydesk.org/2026/06/20/y-combinator-fall-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-miller-centers-accelerator-program-2027
+  title: 'Opportunity Desk: Miller Center’s Accelerator Program 2027'
+  category: fellowships
+  description: 'Deadline: October 16, 2026 Applications are open for the Miller Center’s
+    Accelerator Program 2027. The world-class accelerator is designed for leaders
+    ready to scale. Six months of mentor-guided,...'
+  url: https://opportunitydesk.org/2026/06/20/miller-center-accelerator-program-2027/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-cht-emerging-voices-in-ai-and-society-fellowship-2026-30000-
+  title: 'Opportunity Desk: CHT Emerging Voices in AI and Society Fellowship 2026
+    ($30,000 stipend)'
+  category: fellowships
+  description: 'Deadline: July 12, 2026 Applications are open for the CHT Emerging
+    Voices in AI and Society Fellowship 2026. Center for Humane Technology (CHT) is
+    a nonprofit organization whose mission is to...'
+  url: https://opportunitydesk.org/2026/06/20/cht-emerging-voices-in-ai-and-society-fellowship-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-unfccc-technology-mechanism-ai-for-climate-action-award-2026
+  title: 'Opportunity Desk: UNFCCC Technology Mechanism AI for Climate Action Award
+    2026 (Funded to Antalya, Türkiye)'
+  category: fellowships
+  description: 'Deadline: July 3, 2026 Applications are open for the UNFCCC Technology
+    Mechanism AI for Climate Action Award 2026. Launched in 2024, the UNFCCC Technology
+    Mechanism AI for Climate Action (AICA)...'
+  url: https://opportunitydesk.org/2026/06/20/unfccc-technology-mechanism-ai-for-climate-action-award-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-ecosocc-kenneth-kaunda-graduate-immersion-programme-2026
+  title: 'Opportunity Desk: ECOSOCC Kenneth Kaunda Graduate Immersion Programme 2026'
+  category: fellowships
+  description: 'Deadline: June 26, 2026 Applications are open for the ECOSOCC Kenneth
+    Kaunda Graduate Immersion Programme 2026. The Kenneth Kaunda Graduate Immersion
+    Programme is named after Zambia&#8217;s...'
+  url: https://opportunitydesk.org/2026/06/20/ecosocc-kenneth-kaunda-graduate-immersion-programme-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-african-center-for-economic-transformation-acet-youth-policy
+  title: 'Opportunity Desk: African Center for Economic Transformation (ACET) Youth
+    Policy Lab 2026'
+  category: fellowships
+  description: 'Deadline: July 7, 2026 Applications are open for the African Center
+    for Economic Transformation (ACET) Youth Policy Lab 2026. The ACET Youth Policy
+    Lab is a dynamic platform designed to empower...'
+  url: https://opportunitydesk.org/2026/06/19/acet-youth-policy-lab-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-undp-creatives4peace-youth-online-innovation-challenge-2026
+  title: 'Opportunity Desk: UNDP Creatives4Peace Youth Online Innovation Challenge
+    2026'
+  category: fellowships
+  description: 'Deadline: July 2, 2026 Applications are open for the UNDP Creatives4Peace
+    Youth Online Innovation Challenge 2026. The challenge aims to support young Africans
+    who are using culture and creativity...'
+  url: https://opportunitydesk.org/2026/06/19/undp-creatives4peace-youth-online-innovation-challenge-2026/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
+  active: true
+- id: opportunity-desk-call-for-application-watt-boost-youth-powered-start-up-in-af
+  title: 'Opportunity Desk: Call for Application – wAtt-boost: Youth Powered Start
+    Up in Africa [2nd edition]'
+  category: fellowships
+  description: 'Deadline: June 21, 2026 Applications are invited for the second cohort
+    of the wAtt-boost: Youth Powered Start Up in Africa. Africa&#8217;s path to a
+    sustainable and prosperous future hinges on the...'
+  url: https://opportunitydesk.org/2026/06/19/watt-boost-youth-powered-start-up-in-africa/
+  button_text: Read more →
+  pinned: false
+  added_date: '2026-06-22'
   active: true
