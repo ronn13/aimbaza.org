@@ -4,54 +4,180 @@
 {% block title %}Home{% endblock %}
 {% block description %}MBAZA-NLP — building open-source NLP tools for Kinyarwanda and African languages{% endblock %}
 
+{% block extra_css %}
+<style>
+  .hero-section { padding: 5rem 0 4.5rem; }
+  .hero-logo { height: 130px; width: auto; max-width: 100%; }
+  .hero-tagline { font-size: 1.1rem; color: #b0cfc0; max-width: 420px; line-height: 1.75; }
+
+  .hero-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: .75rem;
+    padding: 1.1rem 1.25rem;
+    transition: background .2s, border-color .2s;
+    text-decoration: none; color: inherit;
+    display: flex; align-items: flex-start; gap: 1rem;
+  }
+  .hero-card:hover {
+    background: rgba(0,184,108,0.10);
+    border-color: rgba(0,184,108,0.30); color: inherit;
+  }
+  .hero-card-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: rgba(0,184,108,0.15); border-radius: .5rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-teal); font-size: 1rem;
+  }
+  .hero-card-title { font-weight: 600; color: #fff; font-size: .95rem; margin-bottom: .2rem; }
+  .hero-card-desc  { font-size: .82rem; color: #7a9e8c; line-height: 1.5; margin: 0; }
+
+  .stats-strip {
+    background: #fff;
+    border-top: 3px solid var(--brand-teal);
+    border-bottom: 1px solid #e9ecef;
+    padding: 1.75rem 0;
+  }
+  .stat-item { text-align: center; }
+  .stat-value { font-size: 1.9rem; font-weight: 800; color: var(--brand-dark); line-height: 1; }
+  .stat-label { font-size: .78rem; color: #6c757d; margin-top: .3rem; text-transform: uppercase; letter-spacing: .07em; }
+
+  .section-title { position: relative; padding-bottom: .5rem; }
+  .section-title::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 36px; height: 3px; background: var(--brand-teal); border-radius: 2px;
+  }
+
+  .quick-link-card {
+    border: 1px solid #e9ecef !important;
+    border-radius: .65rem !important;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .quick-link-card:hover {
+    border-color: var(--brand-teal) !important;
+    box-shadow: 0 4px 16px rgba(0,184,108,.1) !important;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 
-<!-- Hero -->
-<section class="hero-section text-center">
+<!-- ── Hero ─────────────────────────────────────────────────────────── -->
+<section class="hero-section">
   <div class="container">
-    <h1 class="display-4 fw-bold mb-3">MBAZA NLP COMMUNITY</h1>
-    <p class="lead mb-4">
-      Building open-source language AI for Kinyarwanda and African languages.
-    </p>
-    <a href="https://github.com/MBAZA-NLP"
-       class="btn btn-outline-light btn-lg me-3" target="_blank" rel="noopener">
-      <i class="fab fa-github me-2"></i>Explore on GitHub
-    </a>
-    <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
-       class="btn btn-primary btn-lg" target="_blank" rel="noopener">
-      <i class="fab fa-slack me-2"></i>Join our Slack
-    </a>
+    <div class="row align-items-center g-5">
+
+      <!-- Left: Logo + mission + CTAs -->
+      <div class="col-lg-6">
+        <h1 class="visually-hidden">MbazaNLP — Natural Language Processing Community</h1>
+        <img src="{% static 'images/brand/logo-on-dark.png' %}"
+             alt="MbazaNLP — Natural Language Processing"
+             class="hero-logo mb-4 d-block">
+        <p class="hero-tagline mb-4">
+          Building open-source language AI for Kinyarwanda and African languages —
+          models, datasets, and community tools, free for all.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="https://github.com/MBAZA-NLP"
+             class="btn btn-outline-light btn-lg" target="_blank" rel="noopener">
+            <i class="fab fa-github me-2"></i>GitHub
+          </a>
+          <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+             class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+            <i class="fab fa-slack me-2"></i>Join Slack
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Technology feature cards -->
+      <div class="col-lg-6">
+        <div class="d-flex flex-column gap-3">
+          <a href="{% url 'projects:index' %}" class="hero-card">
+            <div class="hero-card-icon"><i class="fas fa-microphone"></i></div>
+            <div>
+              <div class="hero-card-title">Speech Recognition (ASR)</div>
+              <p class="hero-card-desc">Kinyarwanda speech-to-text models trained on community-collected audio data</p>
+            </div>
+          </a>
+          <a href="{% url 'projects:index' %}" class="hero-card">
+            <div class="hero-card-icon"><i class="fas fa-volume-high"></i></div>
+            <div>
+              <div class="hero-card-title">Text-to-Speech (TTS)</div>
+              <p class="hero-card-desc">Natural-sounding voice synthesis for African languages</p>
+            </div>
+          </a>
+          <a href="{% url 'projects:index' %}" class="hero-card">
+            <div class="hero-card-icon"><i class="fas fa-language"></i></div>
+            <div>
+              <div class="hero-card-title">Machine Translation</div>
+              <p class="hero-card-desc">Open translation between Kinyarwanda, English, and French</p>
+            </div>
+          </a>
+          <a href="{% url 'projects:index' %}" class="hero-card">
+            <div class="hero-card-icon"><i class="fas fa-comments"></i></div>
+            <div>
+              <div class="hero-card-title">Chatbots &amp; Dialogue</div>
+              <p class="hero-card-desc">Semantic chatbots and knowledge systems in Kinyarwanda</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
-<!-- About -->
+<!-- ── Stats strip ───────────────────────────────────────────────────── -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-value">20+</div>
+        <div class="stat-label">Open models</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-value">5+</div>
+        <div class="stat-label">Languages</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-value">100%</div>
+        <div class="stat-label">Open source</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item">
+        <div class="stat-value">🌍</div>
+        <div class="stat-label">Africa-focused</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── About ─────────────────────────────────────────────────────────── -->
 <section class="py-5">
   <div class="container">
-    <div class="row g-4">
-      <!-- About text -->
+    <div class="row g-5 align-items-center">
       <div class="col-lg-7">
-        <h2 class="fw-bold mb-3">About MBAZA-NLP</h2>
-        <p class="lead">
-          We are a community working on Natural Language Processing (NLP) for Kinyarwanda and other
-          low-resource languages. For example, we are working on Kinyarwanda automatic speech
-          recognition (ASR, also known as Speech-to-Text, STT), Text-to-Speech (TTS), and semantic
-          chatbots.
+        <h2 class="fw-bold mb-4 section-title">About MbazaNLP</h2>
+        <p class="lead mb-3">
+          We are an open community building Natural Language Processing (NLP) tools
+          for Kinyarwanda and other low-resource African languages.
         </p>
-        <p>
-          Our work is open-source and collaborative. We welcome researchers, engineers, linguists,
-          and enthusiasts who want to help build language technology for African languages.
+        <p class="text-muted mb-4">
+          Our work spans automatic speech recognition (ASR), text-to-speech (TTS),
+          machine translation, and semantic chatbots — all open-source and freely available.
+          We welcome researchers, engineers, linguists, students, and anyone passionate about
+          African language technology.
         </p>
-        <a href="{% url 'community:index' %}" class="btn btn-outline-primary mt-2">
-          Learn more about the community &rarr;
+        <a href="{% url 'community:index' %}" class="btn btn-outline-primary">
+          Meet the community &rarr;
         </a>
       </div>
-      <!-- Quick links -->
       <div class="col-lg-5">
-        <h3 class="fw-semibold mb-3">Quick Links</h3>
         <div class="d-flex flex-column gap-3">
           <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener"
-             class="card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
-            <i class="fab fa-github fa-2x text-dark"></i>
+             class="quick-link-card card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
+            <div style="width:42px;height:42px;background:#f6f8fa;border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fab fa-github fa-lg text-dark"></i>
+            </div>
             <div>
               <div class="fw-semibold">GitHub</div>
               <small class="text-muted">Source code, issues, and contributions</small>
@@ -59,16 +185,20 @@
           </a>
           <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
              target="_blank" rel="noopener"
-             class="card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
-            <i class="fab fa-slack fa-2x text-primary"></i>
+             class="quick-link-card card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
+            <div style="width:42px;height:42px;background:#f0f8f4;border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fab fa-slack fa-lg text-primary"></i>
+            </div>
             <div>
               <div class="fw-semibold">Slack</div>
               <small class="text-muted">Day-to-day discussion and announcements</small>
             </div>
           </a>
           <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
-             class="card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
-            <i class="fas fa-circle-nodes fa-2x text-warning"></i>
+             class="quick-link-card card text-decoration-none text-dark p-3 d-flex flex-row align-items-center gap-3">
+            <div style="width:42px;height:42px;background:#fffbf0;border-radius:.5rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <i class="fas fa-circle-nodes fa-lg text-warning"></i>
+            </div>
             <div>
               <div class="fw-semibold">HuggingFace</div>
               <small class="text-muted">Models, datasets, and Spaces</small>
@@ -80,10 +210,10 @@
   </div>
 </section>
 
-<!-- Upcoming Events preview -->
+<!-- ── Upcoming Events ───────────────────────────────────────────────── -->
 <section class="py-5 bg-light">
   <div class="container">
-    <h2 class="fw-bold mb-3">Upcoming Events</h2>
+    <h2 class="fw-bold mb-4 section-title">Upcoming Events</h2>
     {% if upcoming_events %}
     <div class="row g-3 mb-4">
       {% for event in upcoming_events %}
@@ -124,10 +254,10 @@
   </div>
 </section>
 
-<!-- Partners -->
+<!-- ── Partners ──────────────────────────────────────────────────────── -->
 <section class="py-5">
   <div class="container">
-    <h2 class="fw-bold mb-4 text-center">Our Partners</h2>
+    <h2 class="fw-bold mb-5 section-title">Our Partners</h2>
     <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
       <a href="https://digitalumuganda.com/" target="_blank" rel="noopener"
          class="partner-logo d-flex align-items-center justify-content-center" style="padding:0.75rem 1.25rem;">
