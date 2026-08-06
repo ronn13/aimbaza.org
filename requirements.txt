@@ -1,1 +1,10 @@
--r requirements/production.txt
+Django==4.2.20
+whitenoise==6.7.0
+gunicorn==22.0.0
+psycopg2-binary==2.9.9
+python-decouple==3.8
+requests==2.32.3
+pillow==10.4.0
+feedparser==6.0.11
+PyYAML==6.0.2
+pip-audit==2.7.3
