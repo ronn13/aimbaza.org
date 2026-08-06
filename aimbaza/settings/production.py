@@ -45,6 +45,12 @@ DATABASES = {
 # SECURE_SSL_REDIRECT doesn't loop on platforms that terminate SSL upstream.
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SECURE_SSL_REDIRECT = True
+
+# Platform healthchecks (Railway, Render) hit the container directly over
+# plain HTTP at "/", bypassing the edge proxy that sets X-Forwarded-Proto.
+# Without this, SECURE_SSL_REDIRECT turns that into a 301 and the
+# healthcheck never sees a 200.
+SECURE_REDIRECT_EXEMPT = [r"^$"]
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_SECONDS = 31536000
