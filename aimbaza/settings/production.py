@@ -18,6 +18,11 @@ _render_hostname = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
 if _render_hostname:
     ALLOWED_HOSTS.append(_render_hostname)
 
+# Railway healthchecks originate from this fixed hostname; without it
+# Django returns 400 DisallowedHost and the deploy never goes healthy.
+# https://docs.railway.com/deployments/healthchecks#healthcheck-hostname
+ALLOWED_HOSTS.append("healthcheck.railway.app")
+
 # Database from DATABASE_URL env var
 # Supports: postgres://USER:PASSWORD@HOST:PORT/NAME
 _db_url = config("DATABASE_URL")
