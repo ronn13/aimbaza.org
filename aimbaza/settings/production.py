@@ -23,6 +23,12 @@ if _render_hostname:
 # https://docs.railway.com/deployments/healthchecks#healthcheck-hostname
 ALLOWED_HOSTS.append("healthcheck.railway.app")
 
+# Railway auto-injects this per-environment *.up.railway.app domain;
+# trust it so the generated preview URL works, same as Render above.
+_railway_hostname = os.environ.get("RAILWAY_PUBLIC_DOMAIN")
+if _railway_hostname:
+    ALLOWED_HOSTS.append(_railway_hostname)
+
 # Database from DATABASE_URL env var
 # Supports: postgres://USER:PASSWORD@HOST:PORT/NAME
 _db_url = config("DATABASE_URL")
