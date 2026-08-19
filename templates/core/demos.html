@@ -5,6 +5,25 @@
 
 {% block extra_css %}
 <style>
+  .page-header {
+    background: var(--brand-dark);
+    padding: 3.5rem 0 3rem;
+    color: #fff;
+  }
+  .page-header h1 {
+    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase; letter-spacing: .02em;
+    font-size: clamp(2rem, 4vw, 2.75rem);
+  }
+  .page-header p { color: rgba(255,255,255,.7); max-width: 640px; }
+  .section-title {
+    position: relative; padding-bottom: .5rem;
+    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em;
+  }
+  .section-title::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 36px; height: 3px; background: var(--brand-teal); border-radius: 2px;
+  }
   pre {
     background: #1e1e2e;
     color: #cdd6f4;
@@ -28,15 +47,21 @@
 {% endblock %}
 
 {% block content %}
+
+<section class="page-header">
+  <div class="container">
+    <h1 class="mb-3">Demos</h1>
+    <p class="mb-0">
+      Runnable demonstrations of MbazaNLP models. Each demo includes a command-line script,
+      a Jupyter notebook, and full install instructions.
+    </p>
+  </div>
+</section>
+
 <div class="container py-5">
 
-  <h1 class="fw-bold mb-2">Demos</h1>
-  <p class="lead text-muted mb-5">
-    Runnable demonstrations of MbazaNLP models. Each demo includes a command-line script,
-    a Jupyter notebook, and full install instructions.
-  </p>
-
   {# ── DEMO 1: TRANSLATION ───────────────────────────────────────────── #}
+  <h2 class="section-title fw-bold mb-4">Available Demos</h2>
   <div class="card border-0 shadow-sm mb-5">
     <div class="card-body p-4 p-md-5">
 
@@ -185,16 +210,22 @@ jupyter notebook demos/translation/translation_demo.ipynb</code></pre>
   </div>
 
   {# ── COMING SOON ───────────────────────────────────────────────────── #}
-  <div class="card border-0 bg-light mb-5">
-    <div class="card-body p-4">
-      <span class="badge bg-secondary demo-badge mb-2">Demo #2</span>
-      <h2 class="h4 fw-semibold mb-1 text-muted">Coming after the June 2026 sprint</h2>
-      <p class="text-muted mb-0">
-        A second demonstrator will be published following the community sprint on
-        14–15 June 2026. Topic will be determined by sprint participants.
-        <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
-           target="_blank" rel="noopener">Join Slack</a> to take part.
-      </p>
+  <div class="card border-0 bg-light mb-5" style="border-left: 3px solid var(--brand-teal) !important;">
+    <div class="card-body p-4 d-flex align-items-start gap-3">
+      <div style="width:42px;height:42px;background:rgba(0,184,108,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <i class="fas fa-hourglass-half text-primary"></i>
+      </div>
+      <div>
+        <span class="badge bg-secondary demo-badge mb-2">Demo #2</span>
+        <h2 class="h4 fw-semibold mb-1">Coming after the June 2026 sprint</h2>
+        <p class="text-muted mb-0">
+          A second demonstrator — potentially speech recognition (ASR) or named entity
+          recognition (NER) — will be published following the community sprint on
+          14–15 June 2026. Topic will be determined by sprint participants.
+          <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+             target="_blank" rel="noopener">Join Slack</a> to take part.
+        </p>
+      </div>
     </div>
   </div>
 

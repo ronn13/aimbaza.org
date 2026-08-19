@@ -6,138 +6,127 @@
 
 {% block extra_css %}
 <style>
-  .gallery-wrap {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    background: #e9ecef;
-    border-radius: 4px;
-    overflow: hidden;
+  .page-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 4rem 0 2rem;
   }
+  .page-title {
+    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase; letter-spacing: .02em; line-height: 1.05;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    color: var(--brand-dark);
+  }
+  .page-lead { font-size: 1.15rem; color: #6c757d; max-width: 640px; }
+
+  .event-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .5rem 1rem; border-radius: 50rem;
+    background: #f1f3f5; color: #495057; font-size: .85rem; font-weight: 500;
+  }
+  .count-badge {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .5rem 1rem; border-radius: 50rem;
+    background: rgba(0,184,108,0.1); color: var(--brand-teal); font-size: .85rem; font-weight: 600;
+  }
+
+  .masonry-grid { column-count: 1; column-gap: 1.5rem; }
+  @media (min-width: 576px) { .masonry-grid { column-count: 2; } }
+  @media (min-width: 768px) { .masonry-grid { column-count: 3; } }
+  @media (min-width: 992px) { .masonry-grid { column-count: 4; } }
+
+  .masonry-item {
+    break-inside: avoid; margin-bottom: 1.5rem;
+    position: relative; border-radius: .6rem; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+    background: #e9ecef;
+    cursor: pointer;
+  }
+  .masonry-item.hidden-photo { display: none; }
+
   .gallery-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4px;
-    transition: opacity 0.3s;
-    opacity: 0;
+    display: block; width: 100%; height: auto;
+    opacity: 0; transition: opacity .3s;
   }
   .gallery-img.loaded { opacity: 1; }
-  .gallery-img:hover { opacity: 0.88; }
 
-  /* skeleton shimmer */
-  @keyframes shimmer {
-    0%   { background-position: -400px 0; }
-    100% { background-position: 400px 0; }
+  .masonry-item::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(0,184,108,0); transition: background .25s;
   }
-  .gallery-wrap::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, #e9ecef 25%, #dee2e6 50%, #e9ecef 75%);
-    background-size: 800px 100%;
-    animation: shimmer 1.4s infinite;
-    border-radius: 4px;
-    transition: opacity 0.3s;
+  .masonry-item:hover::after { background: rgba(0,184,108,.18); }
+  .zoom-affordance {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%) translateY(10px);
+    width: 42px; height: 42px; border-radius: 50%;
+    background: rgba(255,255,255,.92); color: var(--brand-dark);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .25s, transform .25s;
   }
-  .gallery-wrap.loaded::before { opacity: 0; pointer-events: none; }
+  .masonry-item:hover .zoom-affordance { opacity: 1; transform: translate(-50%,-50%) translateY(0); }
 
-  .gallery-card { cursor: pointer; }
-
-  /* Lightbox */
   #lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,.9);
+    z-index: 9999; align-items: center; justify-content: center; flex-direction: column;
   }
   #lightbox.active { display: flex; }
-  #lightbox-img-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  #lightbox img {
-    max-height: 85vh;
-    max-width: 92vw;
-    object-fit: contain;
-    border-radius: 4px;
-    transition: opacity 0.2s;
-  }
-  #lightbox-caption {
-    color: #ccc;
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-  }
-  #lightbox-close {
-    position: absolute;
-    top: 1rem;
-    right: 1.25rem;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 2rem;
-    cursor: pointer;
-    line-height: 1;
-  }
+  #lightbox img { max-height: 85vh; max-width: 92vw; object-fit: contain; border-radius: 4px; transition: opacity .2s; }
+  #lightbox-caption { color: #ccc; margin-top: .75rem; font-size: .9rem; }
+  #lightbox-close { position: absolute; top: 1rem; right: 1.25rem; background: none; border: none; color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; }
   #lightbox-prev, #lightbox-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255,255,255,0.15);
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    padding: 0.5rem 0.9rem;
-    border-radius: 4px;
-    cursor: pointer;
+    position: absolute; top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,.15); border: none; color: #fff; font-size: 1.5rem;
+    padding: .5rem .9rem; border-radius: 4px; cursor: pointer;
   }
   #lightbox-prev { left: 1rem; }
   #lightbox-next { right: 1rem; }
+
+  .load-more-btn {
+    border: 2px solid #e9ecef; color: #6c757d; font-weight: 600;
+    border-radius: .6rem; padding: .7rem 1.75rem; background: transparent;
+    transition: border-color .18s, color .18s;
+  }
+  .load-more-btn:hover { border-color: var(--brand-teal); color: var(--brand-teal); }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="container py-5">
+<div class="container">
 
-  <h1 class="fw-bold mb-1">Gallery</h1>
-  <p class="text-muted mb-2">Photos from MBAZA-NLP community events.</p>
-
-  <div class="mb-4">
-    <span class="badge bg-secondary">
-      <i class="fas fa-calendar me-1"></i>Bakame Community Event — Kigali, 15 April 2023
-    </span>
-    <span class="badge bg-light text-dark ms-2">{{ photos|length }} photos</span>
-  </div>
-
-  {% if photos %}
-  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3" id="gallery-grid">
-    {% for photo in photos %}
-    <div class="col">
-      <div class="gallery-card" data-index="{{ forloop.counter0 }}">
-        <div class="gallery-wrap">
-          <img
-            data-src="{% static photo.thumb_url %}"
-            alt="{{ photo.alt }}"
-            class="gallery-img"
-          >
-        </div>
-      </div>
+  <div class="page-header">
+    <h1 class="page-title mb-3">Gallery</h1>
+    <p class="page-lead mb-4">Photos from MBAZA-NLP community events.</p>
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+      <span class="event-badge">
+        <i class="fas fa-location-dot"></i>Bakame Community Event &mdash; Kigali, 15 April 2023
+      </span>
+      <span class="count-badge">
+        <i class="fas fa-images"></i>{{ photos|length }} photo{{ photos|length|pluralize }}
+      </span>
     </div>
-    {% endfor %}
   </div>
-  {% else %}
-  <div class="alert alert-secondary">
-    <i class="fas fa-image me-2"></i>No photos available yet.
+
+  <div class="py-5">
+    {% if photos %}
+    <div class="masonry-grid" id="gallery-grid">
+      {% for photo in photos %}
+      <div class="masonry-item{% if forloop.counter0 >= 12 %} hidden-photo{% endif %}" data-index="{{ forloop.counter0 }}">
+        <img data-src="{% static photo.thumb_url %}" alt="{{ photo.alt }}" class="gallery-img">
+        <div class="zoom-affordance"><i class="fas fa-magnifying-glass-plus"></i></div>
+      </div>
+      {% endfor %}
+    </div>
+    {% if photos|length > 12 %}
+    <div class="mt-5 text-center">
+      <button class="load-more-btn" id="load-more">
+        Load more photos <i class="fas fa-rotate-right ms-1"></i>
+      </button>
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="alert alert-secondary">
+      <i class="fas fa-image me-2"></i>No photos available yet.
+    </div>
+    {% endif %}
   </div>
-  {% endif %}
 
 </div>
 
@@ -162,21 +151,32 @@
     {% endfor %}
   ];
 
-  // IntersectionObserver lazy-loads thumbnails as they enter the viewport
-  const observer = new IntersectionObserver((entries) => {
+  function observe(img) {
+    io.observe(img);
+  }
+  const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const img = entry.target;
       img.src = img.dataset.src;
-      img.onload = () => {
-        img.classList.add('loaded');
-        img.closest('.gallery-wrap').classList.add('loaded');
-      };
-      observer.unobserve(img);
+      img.onload = () => img.classList.add('loaded');
+      io.unobserve(img);
     });
   }, { rootMargin: '200px' });
 
-  document.querySelectorAll('.gallery-img[data-src]').forEach(img => observer.observe(img));
+  document.querySelectorAll('.gallery-img[data-src]').forEach(observe);
+
+  const loadMoreBtn = document.getElementById('load-more');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', () => {
+      document.querySelectorAll('.masonry-item.hidden-photo').forEach(item => {
+        item.classList.remove('hidden-photo');
+        const img = item.querySelector('.gallery-img[data-src]');
+        if (img) observe(img);
+      });
+      loadMoreBtn.remove();
+    });
+  }
 
   // Lightbox
   let current = 0;
@@ -197,8 +197,10 @@
     lb.classList.add('active');
   }
 
-  document.querySelectorAll('.gallery-card').forEach(card => {
-    card.addEventListener('click', () => show(parseInt(card.dataset.index)));
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.masonry-item');
+    if (!card || card.classList.contains('hidden-photo')) return;
+    show(parseInt(card.dataset.index));
   });
 
   lbClose.addEventListener('click', () => lb.classList.remove('active'));
