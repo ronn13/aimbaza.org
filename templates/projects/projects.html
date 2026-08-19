@@ -3,89 +3,162 @@
 {% block title %}Projects &amp; Models{% endblock %}
 {% block description %}MBAZA-NLP open-source NLP models and datasets for Kinyarwanda and East African languages{% endblock %}
 
+{% block extra_css %}
+<style>
+  .page-header {
+    position: relative;
+    padding: 5rem 0;
+    background-color: var(--brand-dark);
+    background-image: radial-gradient(rgba(0,184,108,.18) 1px, transparent 1px);
+    background-size: 28px 28px;
+    overflow: hidden;
+  }
+  .page-header-title {
+    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase; letter-spacing: .03em;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+  }
+  .page-header-lead { color: rgba(255,255,255,.7); max-width: 700px; margin: 0 auto; }
+
+  .section-title {
+    position: relative; padding-bottom: .5rem;
+    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em;
+  }
+  .section-title::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 36px; height: 3px; background: var(--brand-teal); border-radius: 2px;
+  }
+  .model-category { border-bottom: 1px solid #e9ecef; padding-bottom: 1rem; margin-bottom: 2rem; }
+  .model-category-icon { font-size: 1.6rem; }
+
+  .model-card {
+    border: 1px solid #e9ecef; border-radius: .65rem;
+    padding: 1.5rem; height: 100%;
+    transition: box-shadow .2s, transform .2s, border-color .2s;
+  }
+  .model-card:hover {
+    box-shadow: 0 12px 26px rgba(0,184,108,.14);
+    border-color: rgba(0,184,108,.35);
+    transform: translateY(-3px);
+  }
+  .model-badge {
+    display: inline-block; padding: .3rem .7rem; border-radius: 50rem;
+    background: rgba(0,184,108,.12); color: var(--brand-teal-dk);
+    font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    margin-bottom: .8rem;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="container py-5">
 
-  <h1 class="fw-bold mb-2">Projects &amp; Models</h1>
-  <p class="lead text-muted mb-5">
-    Open-source NLP models and datasets for Kinyarwanda and East African languages,
-    built by the MbazaNLP community and freely available on HuggingFace.
-  </p>
+<!-- ── Page header ───────────────────────────────────────────────────── -->
+<header class="page-header text-white text-center">
+  <div class="container position-relative">
+    <h1 class="page-header-title mb-3">Projects &amp; Models</h1>
+    <p class="page-header-lead lead mb-0">
+      Open-source NLP models and datasets for Kinyarwanda and East African languages,
+      built by the MbazaNLP community and freely available on HuggingFace.
+    </p>
+  </div>
+</header>
 
-  <!-- Translation -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-language text-primary me-2"></i>Machine Translation</h2>
-  <div class="row g-3 mb-5">
-    {% for m in translation_models %}
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h6 class="card-title fw-semibold mb-1">{{ m.name }}</h6>
-          <p class="card-text text-muted small flex-grow-1">{{ m.desc }}</p>
+<!-- ── Model sections ────────────────────────────────────────────────── -->
+<section class="py-5 bg-light">
+  <div class="container">
+
+    <!-- Machine Translation -->
+    <div class="model-category d-flex align-items-center gap-3">
+      <i class="fas fa-language model-category-icon text-primary"></i>
+      <h2 class="section-title mb-0 fs-3">Machine Translation</h2>
+    </div>
+    <div class="row g-3 mb-5">
+      {% for m in translation_models %}
+      <div class="col-md-6 col-lg-4">
+        <div class="model-card">
+          <span class="model-badge">NMT Model</span>
+          <h3 class="fw-bold fs-5 mb-2">{{ m.name }}</h3>
+          <p class="text-muted small mb-3">{{ m.desc }}</p>
           <a href="{{ m.url }}" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-primary mt-2">View on HuggingFace &rarr;</a>
+             class="btn btn-sm btn-outline-primary w-100">
+            <i class="fas fa-up-right-from-square me-2"></i>View on HuggingFace
+          </a>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
 
-  <!-- ASR -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-microphone text-success me-2"></i>Speech Recognition (ASR)</h2>
-  <div class="row g-3 mb-5">
-    {% for m in asr_models %}
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h6 class="card-title fw-semibold mb-1">{{ m.name }}</h6>
-          <p class="card-text text-muted small flex-grow-1">{{ m.desc }}</p>
+    <!-- Speech Recognition / ASR -->
+    <div class="model-category d-flex align-items-center gap-3">
+      <i class="fas fa-microphone model-category-icon" style="color:#198754;"></i>
+      <h2 class="section-title mb-0 fs-3">Speech Recognition / ASR</h2>
+    </div>
+    <div class="row g-3 mb-5">
+      {% for m in asr_models %}
+      <div class="col-md-6 col-lg-4">
+        <div class="model-card">
+          <span class="model-badge" style="background:rgba(25,135,84,.10); color:#198754;">ASR Model</span>
+          <h3 class="fw-bold fs-5 mb-2">{{ m.name }}</h3>
+          <p class="text-muted small mb-3">{{ m.desc }}</p>
           <a href="{{ m.url }}" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-success mt-2">View on HuggingFace &rarr;</a>
+             class="btn btn-sm btn-outline-success w-100">
+            <i class="fas fa-up-right-from-square me-2"></i>View on HuggingFace
+          </a>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
 
-  <!-- TTS & Other -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-volume-high text-warning me-2"></i>Text-to-Speech &amp; Other</h2>
-  <div class="row g-3 mb-5">
-    {% for m in other_models %}
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h6 class="card-title fw-semibold mb-1">{{ m.name }}</h6>
-          <p class="card-text text-muted small flex-grow-1">{{ m.desc }}</p>
+    <!-- Text-to-Speech & Other -->
+    <div class="model-category d-flex align-items-center gap-3">
+      <i class="fas fa-volume-high model-category-icon" style="color:#f0ad4e;"></i>
+      <h2 class="section-title mb-0 fs-3">Text-to-Speech &amp; Other</h2>
+    </div>
+    <div class="row g-3 mb-5">
+      {% for m in other_models %}
+      <div class="col-md-6 col-lg-4">
+        <div class="model-card">
+          <span class="model-badge" style="background:rgba(240,173,78,.14); color:#a97218;">Model</span>
+          <h3 class="fw-bold fs-5 mb-2">{{ m.name }}</h3>
+          <p class="text-muted small mb-3">{{ m.desc }}</p>
           <a href="{{ m.url }}" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-warning mt-2">View on HuggingFace &rarr;</a>
+             class="btn btn-sm mt-auto w-100" style="border:1px solid #f0ad4e; color:#a97218;">
+            <i class="fas fa-up-right-from-square me-2"></i>View on HuggingFace
+          </a>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
 
-  <!-- Datasets -->
-  <h2 class="h4 fw-semibold mb-3"><i class="fas fa-database text-secondary me-2"></i>Datasets</h2>
-  <div class="row g-3 mb-5">
-    {% for d in datasets %}
-    <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
-        <div class="card-body d-flex flex-column">
-          <h6 class="card-title fw-semibold mb-1">{{ d.name }}</h6>
-          <p class="card-text text-muted small flex-grow-1">{{ d.desc }}</p>
+    <!-- Datasets (real content, not in the Stitch mockup, kept and restyled) -->
+    <div class="model-category d-flex align-items-center gap-3">
+      <i class="fas fa-database model-category-icon text-secondary"></i>
+      <h2 class="section-title mb-0 fs-3">Datasets</h2>
+    </div>
+    <div class="row g-3 mb-4">
+      {% for d in datasets %}
+      <div class="col-md-6 col-lg-4">
+        <div class="model-card">
+          <span class="model-badge" style="background:#eef0f2; color:#495057;">Dataset</span>
+          <h3 class="fw-bold fs-5 mb-2">{{ d.name }}</h3>
+          <p class="text-muted small mb-3">{{ d.desc }}</p>
           <a href="{{ d.url }}" target="_blank" rel="noopener"
-             class="btn btn-sm btn-outline-secondary mt-2">View on HuggingFace &rarr;</a>
+             class="btn btn-sm btn-outline-secondary w-100">
+            <i class="fas fa-up-right-from-square me-2"></i>View on HuggingFace
+          </a>
         </div>
       </div>
+      {% endfor %}
     </div>
-    {% endfor %}
+
+    <p class="text-muted small mb-0">
+      All models and datasets are openly licensed.
+      Browse the full collection at
+      <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">huggingface.co/mbazaNLP</a>
+      and <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener">github.com/MBAZA-NLP</a>.
+    </p>
+
   </div>
+</section>
 
-  <p class="text-muted small">
-    All models and datasets are openly licensed.
-    Browse the full collection at
-    <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">huggingface.co/mbazaNLP</a>
-    and <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener">github.com/MBAZA-NLP</a>.
-  </p>
-
-</div>
 {% endblock %}

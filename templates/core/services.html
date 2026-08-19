@@ -3,22 +3,76 @@
 {% block title %}Services &amp; Offerings{% endblock %}
 {% block description %}What MbazaNLP offers — open NLP tools, research collaboration, and community resources for Kinyarwanda and African languages{% endblock %}
 
+{% block extra_css %}
+<style>
+  .section-title {
+    position: relative; padding-bottom: .5rem;
+    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em;
+  }
+  .section-title::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 36px; height: 3px; background: var(--brand-teal); border-radius: 2px;
+  }
+  .offering-card {
+    border: 1px solid #e9ecef !important;
+    border-radius: .75rem !important;
+    transition: box-shadow .2s, transform .2s, border-color .2s;
+  }
+  .offering-card:hover {
+    box-shadow: 0 10px 25px rgba(0,184,108,.12);
+    border-color: rgba(0,184,108,.35) !important;
+    transform: translateY(-2px);
+  }
+  .offering-icon {
+    width: 52px; height: 52px;
+    background: rgba(0,184,108,0.1); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-teal); font-size: 1.4rem; margin-bottom: 1rem;
+  }
+  .collab-card {
+    border: 1px solid #e9ecef;
+    border-radius: .75rem;
+    background: var(--bs-light, #f8f9fa);
+    transition: box-shadow .2s, border-color .2s;
+  }
+  .collab-card:hover {
+    box-shadow: 0 10px 25px rgba(0,184,108,.10);
+    border-color: rgba(0,184,108,.3);
+  }
+  .collab-icon {
+    width: 56px; height: 56px; flex-shrink: 0;
+    background: rgba(0,184,108,0.12); border-radius: .65rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-teal); font-size: 1.5rem;
+  }
+</style>
+{% endblock %}
+
 {% block content %}
+
+<!-- ── Header ────────────────────────────────────────────────────────── -->
+<header class="bg-dark text-white py-5" style="background: var(--brand-dark) !important;">
+  <div class="container">
+    <h1 class="fw-bold mb-3" style="font-family:'Anton',sans-serif; text-transform:uppercase; letter-spacing:.02em;">
+      Services &amp; Offerings
+    </h1>
+    <p class="lead mb-0" style="color:rgba(255,255,255,.75); max-width:640px;">
+      MbazaNLP provides open-source NLP infrastructure and community resources for Kinyarwanda
+      and East African languages. All tools are freely available under open licences.
+    </p>
+  </div>
+</header>
+
 <div class="container py-5">
 
-  <h1 class="fw-bold mb-2">Services &amp; Offerings</h1>
-  <p class="lead text-muted mb-5">
-    MbazaNLP provides open-source NLP infrastructure and community resources for Kinyarwanda
-    and East African languages. All tools are freely available under open licences.
-  </p>
-
   <!-- Core offerings -->
+  <h2 class="fw-bold mb-4 section-title">Core Offerings</h2>
   <div class="row g-4 mb-5">
 
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center border-0 shadow-sm">
+      <div class="card offering-card h-100 border-0 shadow-sm">
         <div class="card-body py-4">
-          <i class="fas fa-language fa-3x text-primary mb-3"></i>
+          <div class="offering-icon"><i class="fas fa-language"></i></div>
           <h5 class="fw-semibold">Machine Translation</h5>
           <p class="text-muted small">
             Open models for English–Kinyarwanda translation across general, education,
@@ -32,15 +86,15 @@
     </div>
 
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center border-0 shadow-sm">
+      <div class="card offering-card h-100 border-0 shadow-sm">
         <div class="card-body py-4">
-          <i class="fas fa-microphone fa-3x text-success mb-3"></i>
+          <div class="offering-icon"><i class="fas fa-microphone"></i></div>
           <h5 class="fw-semibold">Speech Recognition</h5>
           <p class="text-muted small">
             ASR models for Kinyarwanda using Whisper, NeMo Conformer, and Coqui STT.
             Multilingual model covers Kinyarwanda, Swahili, and Luganda.
           </p>
-          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-success">
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-primary">
             Browse models &rarr;
           </a>
         </div>
@@ -48,15 +102,15 @@
     </div>
 
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center border-0 shadow-sm">
+      <div class="card offering-card h-100 border-0 shadow-sm">
         <div class="card-body py-4">
-          <i class="fas fa-volume-high fa-3x text-warning mb-3"></i>
+          <div class="offering-icon"><i class="fas fa-volume-high"></i></div>
           <h5 class="fw-semibold">Text-to-Speech</h5>
           <p class="text-muted small">
             TTS synthesis model producing natural Kinyarwanda speech,
             suitable for accessibility and voice interface applications.
           </p>
-          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-warning">
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-primary">
             Browse models &rarr;
           </a>
         </div>
@@ -64,15 +118,15 @@
     </div>
 
     <div class="col-md-6 col-lg-3">
-      <div class="card h-100 text-center border-0 shadow-sm">
+      <div class="card offering-card h-100 border-0 shadow-sm">
         <div class="card-body py-4">
-          <i class="fas fa-database fa-3x text-secondary mb-3"></i>
+          <div class="offering-icon"><i class="fas fa-database"></i></div>
           <h5 class="fw-semibold">Open Datasets</h5>
           <p class="text-muted small">
             Parallel corpora and benchmark datasets for Kinyarwanda NLP research,
             openly licensed for academic and commercial use.
           </p>
-          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-secondary">
+          <a href="{% url 'projects:index' %}" class="btn btn-sm btn-outline-primary">
             Browse datasets &rarr;
           </a>
         </div>
@@ -82,11 +136,12 @@
   </div>
 
   <!-- Research collaboration -->
+  <h2 class="fw-bold mb-4 section-title">Research Collaboration</h2>
   <div class="row g-4 mb-5">
     <div class="col-md-6">
-      <div class="card h-100 border-0 bg-light">
-        <div class="card-body">
-          <div class="mb-3"><i class="fas fa-microscope fa-2x text-primary"></i></div>
+      <div class="collab-card h-100 p-4 d-flex gap-3">
+        <div class="collab-icon"><i class="fas fa-microscope"></i></div>
+        <div>
           <h5 class="fw-semibold">Research Collaboration</h5>
           <p class="text-muted">
             MbazaNLP welcomes research partnerships with universities, institutes, and NGOs
@@ -106,9 +161,9 @@
     </div>
 
     <div class="col-md-6">
-      <div class="card h-100 border-0 bg-light">
-        <div class="card-body">
-          <div class="mb-3"><i class="fas fa-chalkboard-teacher fa-2x text-success"></i></div>
+      <div class="collab-card h-100 p-4 d-flex gap-3">
+        <div class="collab-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <div>
           <h5 class="fw-semibold">Training &amp; Workshops</h5>
           <p class="text-muted">
             The community organises technical workshops and sprints for developers and researchers
@@ -120,7 +175,7 @@
             <li>Deploying AI models in production (APIs, demos)</li>
             <li>Contributing to open-source AI projects</li>
           </ul>
-          <a href="{% url 'events:index' %}" class="btn btn-sm btn-success">
+          <a href="{% url 'events:index' %}" class="btn btn-sm btn-primary">
             Upcoming events &rarr;
           </a>
         </div>

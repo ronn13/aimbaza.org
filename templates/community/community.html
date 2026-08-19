@@ -1,88 +1,162 @@
 {% extends "base.html" %}
 
 {% block title %}Community{% endblock %}
-{% block description %}Join the MBAZA-NLP open community — Slack, GitHub, HuggingFace{% endblock %}
+{% block description %}Join the MbazaNLP open community — Slack, GitHub, HuggingFace{% endblock %}
+
+{% block extra_css %}
+<style>
+  .page-header {
+    padding: 4.5rem 0 3rem;
+    background: var(--brand-dark);
+  }
+  .page-title {
+    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase; letter-spacing: .02em;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+  }
+  .page-intro { font-size: 1.05rem; color: rgba(255,255,255,.72); max-width: 640px; line-height: 1.7; font-weight: 300; }
+
+  .section-title {
+    position: relative; padding-bottom: .5rem;
+    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .02em;
+  }
+  .section-title::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 36px; height: 3px; background: var(--brand-teal); border-radius: 2px;
+  }
+
+  .channel-card {
+    border: 1px solid #e9ecef !important;
+    border-radius: .75rem !important;
+    height: 100%;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .channel-card:hover {
+    border-color: var(--brand-teal) !important;
+    box-shadow: 0 4px 16px rgba(0,184,108,.1) !important;
+  }
+  .channel-icon {
+    width: 46px; height: 46px;
+    background: rgba(0,184,108,0.12); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-teal); font-size: 1.15rem; margin-bottom: 1rem;
+  }
+
+  .info-card {
+    border: 1px solid #e9ecef !important;
+    border-radius: .75rem !important;
+    padding: 2rem;
+  }
+  .info-icon {
+    width: 52px; height: 52px;
+    background: rgba(0,184,108,0.12); border-radius: .65rem;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-teal); font-size: 1.3rem; margin-bottom: 1rem;
+  }
+</style>
+{% endblock %}
 
 {% block content %}
-<div class="container py-5">
 
-  <h1 class="fw-bold mb-3">Community</h1>
-  <p class="lead mb-5">
-    MBAZA-NLP is an open community. Everyone is welcome — researchers, engineers, linguists,
-    students, and anyone passionate about African language technology.
-  </p>
-
-  <!-- Channels table -->
-  <h2 class="h4 fw-semibold mb-3">Community Channels</h2>
-  <div class="table-responsive mb-5">
-    <table class="table table-bordered align-middle">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">Channel</th>
-          <th scope="col">Link</th>
-          <th scope="col">Purpose</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><i class="fab fa-slack me-2 text-primary"></i>Slack</td>
-          <td>
-            <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
-               target="_blank" rel="noopener">Join Slack workspace</a>
-          </td>
-          <td>Day-to-day discussion, help, and announcements</td>
-        </tr>
-        <tr>
-          <td><i class="fab fa-github me-2 text-dark"></i>GitHub</td>
-          <td>
-            <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener">
-              github.com/MBAZA-NLP
-            </a>
-          </td>
-          <td>Code, issues, and pull requests</td>
-        </tr>
-        <tr>
-          <td><i class="fas fa-circle-nodes me-2 text-warning"></i>HuggingFace</td>
-          <td>
-            <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener">
-              huggingface.co/mbazaNLP
-            </a>
-          </td>
-          <td>Models, datasets, and Spaces</td>
-        </tr>
-        <tr>
-          <td><i class="fas fa-envelope me-2 text-secondary"></i>Email</td>
-          <td>
-            <a href="mailto:mbazanlp.community@gmail.com">
-              mbazanlp.community@gmail.com
-            </a>
-          </td>
-          <td>General enquiries</td>
-        </tr>
-      </tbody>
-    </table>
+<!-- ── Header ────────────────────────────────────────────────────────── -->
+<section class="page-header">
+  <div class="container">
+    <h1 class="page-title text-white mb-3">Community</h1>
+    <p class="page-intro mb-0">
+      MbazaNLP is an open community. Everyone is welcome — researchers, engineers, linguists,
+      students, and anyone passionate about African language technology.
+    </p>
   </div>
+</section>
 
-  <!-- Partners -->
-  <h2 class="h4 fw-semibold mb-3">Partners</h2>
-  <p class="text-muted">
-    MbazaNLP works with funders, data partners, research institutions, and community
-    organisations across Africa and beyond.
-  </p>
-  <a href="{% url 'community:partners' %}" class="btn btn-outline-primary mb-5">
-    <i class="fas fa-handshake me-2"></i>View partner registry &rarr;
-  </a>
+<!-- ── Community Channels ───────────────────────────────────────────── -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="fw-bold mb-4 section-title">Community Channels</h2>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-3">
+        <div class="channel-card card p-3">
+          <div class="channel-icon"><i class="fab fa-slack"></i></div>
+          <div class="fw-semibold mb-1">Slack</div>
+          <p class="text-muted small mb-3">Join the daily conversation, ask questions, and collaborate with peers.</p>
+          <a href="https://join.slack.com/t/aimbaza/shared_invite/zt-3xrd8y8km-zZK83JcPxcG8uxOMZCptpg"
+             target="_blank" rel="noopener" class="btn btn-sm btn-outline-primary mt-auto">
+            Join Workspace &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="channel-card card p-3">
+          <div class="channel-icon"><i class="fab fa-github"></i></div>
+          <div class="fw-semibold mb-1">GitHub</div>
+          <p class="text-muted small mb-3">Contribute to open-source models, datasets, and tools.</p>
+          <a href="https://github.com/MBAZA-NLP" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-primary mt-auto">
+            View Repositories &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="channel-card card p-3">
+          <div class="channel-icon"><i class="fas fa-circle-nodes"></i></div>
+          <div class="fw-semibold mb-1">HuggingFace</div>
+          <p class="text-muted small mb-3">Explore our published models, spaces, and datasets.</p>
+          <a href="https://huggingface.co/mbazaNLP" target="_blank" rel="noopener"
+             class="btn btn-sm btn-outline-primary mt-auto">
+            Explore Organization &rarr;
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="channel-card card p-3">
+          <div class="channel-icon"><i class="fas fa-envelope"></i></div>
+          <div class="fw-semibold mb-1">Email</div>
+          <p class="text-muted small mb-3">For official inquiries, partnerships, and press.</p>
+          <a href="mailto:mbazanlp.community@gmail.com" class="btn btn-sm btn-outline-primary mt-auto">
+            Contact Us &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- Contributing -->
-  <h2 class="h4 fw-semibold mb-3">Contributing</h2>
-  <p>
-    Want to contribute? Read our Contributing Guide to learn how to get started with code,
-    data, or documentation contributions.
-  </p>
-  <a href="https://github.com/MBAZA-NLP/.github/blob/main/CONTRIBUTING.md"
-     target="_blank" rel="noopener" class="btn btn-outline-dark">
-    <i class="fab fa-github me-2"></i>Read the Contributing Guide
-  </a>
+<!-- ── Partners ──────────────────────────────────────────────────────── -->
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-8">
+        <h2 class="fw-bold mb-3 section-title">Partners</h2>
+        <p class="text-muted mb-0">
+          MbazaNLP works with funders, data partners, research institutions, and community
+          organisations across Africa and beyond.
+        </p>
+      </div>
+      <div class="col-lg-4 text-lg-end">
+        <a href="{% url 'community:partners' %}" class="btn btn-outline-primary">
+          <i class="fas fa-handshake me-2"></i>View partner registry &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- ── Contributing ──────────────────────────────────────────────────── -->
+<section class="py-5">
+  <div class="container">
+    <div class="info-card card">
+      <div class="info-icon"><i class="fas fa-hands-helping"></i></div>
+      <h2 class="fw-bold mb-3 section-title">Contributing</h2>
+      <p class="mb-4">
+        Want to contribute? Read our Contributing Guide to learn how to get started with code,
+        data, or documentation contributions.
+      </p>
+      <a href="https://github.com/MBAZA-NLP/.github/blob/main/CONTRIBUTING.md"
+         target="_blank" rel="noopener" class="btn btn-outline-dark">
+        <i class="fab fa-github me-2"></i>Read the Contributing Guide
+      </a>
+    </div>
+  </div>
+</section>
+
 {% endblock %}

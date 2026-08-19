@@ -176,7 +176,10 @@ def _entry_date(entry):
 
 
 class Command(BaseCommand):
-    help = "Fetch international AI/NLP events from RSS feeds and update international_events.yaml"
+    help = (
+        "Fetch international AI/NLP events from RSS feeds and update "
+        "international_events.yaml"
+    )
 
     def add_arguments(self, parser):
         parser.add_argument("--dry-run", action="store_true")
@@ -184,7 +187,10 @@ class Command(BaseCommand):
             "--days",
             type=int,
             default=LOOKBACK_DAYS_DEFAULT,
-            help="Only consider RSS entries published within this many days (default: 60)",
+            help=(
+                "Only consider RSS entries published within this many days "
+                "(default: 60)"
+            ),
         )
 
     def handle(self, *args, **options):

@@ -3,36 +3,72 @@
 {% block title %}Blog{% endblock %}
 {% block description %}MBAZA-NLP community blog — technical articles, release notes, and community updates{% endblock %}
 
-{% block content %}
-<div class="container py-5">
+{% block extra_css %}
+<style>
+  .blog-header {
+    padding: 4rem 0 2.5rem;
+  }
+  .blog-title {
+    font-family: 'Anton', 'Plus Jakarta Sans', sans-serif;
+    text-transform: uppercase; letter-spacing: .02em; line-height: 1.1;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+  }
+  .blog-intro { font-size: 1.1rem; color: #6c757d; max-width: 620px; }
 
-  <h1 class="fw-bold mb-2">Blog</h1>
-  <p class="lead text-muted mb-5">
-    Technical articles, release notes, and community updates from MbazaNLP.
-  </p>
+  .blog-card {
+    border: 1px solid #e9ecef !important;
+    border-radius: .65rem !important;
+    transition: border-color .18s, box-shadow .18s, transform .18s;
+    height: 100%;
+  }
+  .blog-card:hover {
+    border-color: var(--brand-teal) !important;
+    box-shadow: 0 6px 20px rgba(0,184,108,.12) !important;
+    transform: translateY(-2px);
+  }
+  .blog-card-meta { font-size: .82rem; color: #8a8f94; }
+  .blog-card-title { font-weight: 700; font-size: 1.15rem; line-height: 1.3; }
+  .blog-card .read-more {
+    font-weight: 600; font-size: .88rem;
+    display: inline-flex; align-items: center; gap: .4rem;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="blog-header">
+    <h1 class="blog-title mb-3">Blog</h1>
+    <p class="blog-intro mb-0">
+      Technical articles, release notes, and community updates from MbazaNLP.
+    </p>
+  </div>
 
   {% if posts %}
-  <div class="row g-4">
+  <div class="row g-4 pb-5">
     {% for post in posts %}
     <div class="col-md-6 col-lg-4">
-      <div class="card h-100">
+      <div class="card blog-card">
         <div class="card-body d-flex flex-column">
-          <p class="text-muted small mb-1">
-            <i class="fas fa-calendar me-1"></i>{{ post.published|date:"j F Y" }}
+          <p class="blog-card-meta mb-2">
+            <i class="fas fa-calendar me-1"></i>{{ post.published|date:"j M Y" }}
             &nbsp;&middot;&nbsp;{{ post.author }}
           </p>
-          <h5 class="card-title fw-semibold">{{ post.title }}</h5>
-          <p class="card-text text-muted flex-grow-1">{{ post.excerpt }}</p>
-          <a href="{% url 'blog:detail' post.slug %}" class="btn btn-sm btn-outline-primary mt-2">
-            Read more &rarr;
-          </a>
+          <h2 class="blog-card-title mb-2">{{ post.title }}</h2>
+          <p class="text-muted flex-grow-1">{{ post.excerpt }}</p>
+          <div class="pt-2 mt-auto border-top">
+            <a href="{% url 'blog:detail' post.slug %}" class="read-more text-decoration-none mt-2 d-inline-flex">
+              Read more <i class="fas fa-arrow-right"></i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
   {% else %}
-  <div class="alert alert-secondary" role="alert">
+  <div class="alert alert-secondary mb-5" role="alert">
     <i class="fas fa-pen-to-square me-2"></i>
     No posts published yet. Check back soon.
   </div>

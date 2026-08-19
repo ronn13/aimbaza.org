@@ -76,7 +76,7 @@ def _load_international():
 
 
 def _annotate_international(events, today):
-    """Parse date/deadline strings and attach display-ready values to each event dict."""
+    """Parse date/deadline strings and attach display-ready values to each event."""
     for e in events:
         for field in ("date", "deadline"):
             raw = e.get(field)
@@ -106,7 +106,10 @@ def _sort_by_date(events):
     """Sort events by date ascending; events with no date go last."""
     return sorted(
         events,
-        key=lambda e: (e["_date_parsed"] is None, e["_date_parsed"] or datetime.date.min),
+        key=lambda e: (
+            e["_date_parsed"] is None,
+            e["_date_parsed"] or datetime.date.min,
+        ),
     )
 
 
